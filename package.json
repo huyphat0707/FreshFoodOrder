@@ -1,0 +1,55 @@
+{
+  "name": "serveorder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "watch": {
+    "build": "public/js/main.js"
+  },
+  "scripts": {
+    "dev": "concurrently --kill-others \"gulp dev\" \"nodemon serve\"",
+    "start": "concurrently --kill-others \"gulp build\" \"node serve\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.3",
+    "bcrypt": "^5.0.0",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.5.2",
+    "concurrently": "^5.3.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.5",
+    "cross-env": "^7.0.2",
+    "css-loader": "^4.3.0",
+    "cssnano": "^4.1.10",
+    "express": "^4.17.1",
+    "express-flash-messages": "^0.1.1",
+    "express-handlebars": "^5.1.0",
+    "express-handlebars-sections": "^1.0.1",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.6.1",
+    "file-loader": "^6.1.0",
+    "gulp": "^4.0.2",
+    "gulp-csso": "^4.0.1",
+    "gulp-sass": "^4.1.0",
+    "mini-css-extract-plugin": "^0.11.2",
+    "mongoose": "^5.10.7",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "npm-watch": "^0.7.0",
+    "passport": "^0.4.1",
+    "postcss-loader": "^4.0.2",
+    "postcss-preset-env": "^6.7.0",
+    "sass-loader": "^10.0.2"
+  },
+  "devDependencies": {
+    "handlebars": "^4.5.0",
+    "node-sass": "^4.14.1",
+    "nodemon": "^2.0.4",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  }
+}
