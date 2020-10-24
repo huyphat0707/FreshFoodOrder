@@ -1,22 +1,29 @@
-<div class="bases__box">
-    <div class="card card-container">
-        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-        <p id="profile-name" class="profile-name-card"></p>
-        <form action="/loginProcess" method="POST" class="form-signin">
-            <span id="sdt" class="sdt"></span>
-            <input type="sdt" name="sdt" id="sdt" class="form-control" placeholder="Số Điện Thoại" required
-                autofocus>
-            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password"
-                required>
-            <div id="remember" class="checkbox">
-                <label>
-                    <input type="checkbox" value="remember-me"> Remember me
-                </label>
-            </div>
-            <button class="bases__button" type="submit">Sign in</button>
-        </form><!-- /form -->
-        <a href="#" class="forgot-password">
-            Forgot the password?
-        </a>
+<div class="page__loginad">
+    <div class="page__loginad-form">
+        <div class="card card-container">
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <form action="/admin/login" method="POST" class="form-signin">
+                <div class="form-group">
+                    <span id="email" class="email"></span>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Email" required
+                        autofocus>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" id="inputPassword" class="form-control"
+                        placeholder="Password" required>
+                </div>
+
+                <div id="remember" class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                <button class="bases__button" type="submit">Sign in</button>
+            </form><!-- /form -->
+            <a href="#" class="forgot-password">
+                Forgot the password?
+            </a>
+        </div>
     </div>
 </div>

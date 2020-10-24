@@ -1,0 +1,13 @@
+.page{
+    &__loginad{
+        &-form {
+            &:first-child {
+                padding-bottom: 44px;
+                border-bottom: 1px solid $color-light-shadow;
+            }
+            &:last-child {
+                padding-top: 44px;
+            }
+        }
+    }
+}

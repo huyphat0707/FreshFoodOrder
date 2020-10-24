@@ -8,15 +8,22 @@ var session = require('express-session');
 var createError = require('http-errors');
 var bodyParser = require('body-parser');
 var express_handlebars_sections = require('express-handlebars-sections');
-const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
+const expressValidator = require('express-validator');
+app.use(expressValidator());
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
+const passport = require('passport');
 
 var admin = require('./routes/admin');
 var product = require('./routes/product');
 var cate = require('./routes/cate');
+var user = require('./routes/user');
+var users = require('./routes/userAdmin');
+
 
 //connect mongoose
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://admin:0joIlgGzoKMMEagE@cluster0.adn4g.mongodb.net/FreshVegetablemanager?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true ,useFindAndModify: false}, function (err) {
+mongoose.connect('mongodb+srv://admin:0joIlgGzoKMMEagE@cluster0.adn4g.mongodb.net/FreshVegetablemanager?retryWrites=true&w=majority', { useNewUrlParser: true, 
+useUnifiedTopology: true ,useFindAndModify: false}, function (err) {
   if (err) {
     console.log("Mongoose connect err" + err)
   } else {
@@ -50,10 +57,24 @@ app.use(session({
   saveUninitialized: true,
   resave: true
 }));
+
+app.use(function(req, res, next){
+  res.locals.login = req.isAuthenticated();
+  res.locals.session = req.session;
+  // res.locals.succsess_msg = req.flash('succsess_msg');
+  res.locals.user = req.user;
+  next();
+});
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport');
 app.use(flash());
 app.use('/admin', admin);
 app.use('/admin/product', product);
 app.use('/admin/cate', cate);
+app.use('/admin/user', users);
+app.use('/user', user);
+// app.use('/', indexRouter);
 
 //serving static files
 // app.use(express.static('public'));

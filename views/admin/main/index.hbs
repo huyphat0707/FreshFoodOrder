@@ -1,25 +1,14 @@
 <!DOCTYPE html>
 <html class=" ">
-
 <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Trang quản lý</title>
-    <link rel="apple-touch-icon-precomposed" href="/admin_js/assets/images/apple-touch-icon-57-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114"
-        href="/admin_js/assets/images/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72"
-        href="/admin_js/assets/images/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144"
-        href="/admin_js/assets/images/apple-touch-icon-144-precomposed.png">
+    <title>ADMIN</title>
     <link href="/admin_js/assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="/admin_js/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="/admin_js/assets/plugins/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
     <link href="/admin_js/assets/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
     <link href="/admin_js/assets/css/animate.min.css" rel="stylesheet" type="/text/css" />
-    <link href="/admin_js/assets/plugins/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" type="text/css" />
-    <link href="/admin_js/assets/plugins/jvectormap/jquery-jvectormap-2.0.1.css" rel="stylesheet" type="text/css"
-        media="screen" />
     <link href="/admin_js/assets/css/style.css" rel="stylesheet" type="text/css" />
     <link href="/admin_js/assets/css/responsive.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="/dist/css/main.css">
@@ -47,9 +36,9 @@
                             <span class="name"> <i class="fa fa-angle-down"></i></span>
                         </a>
                         <ul class="dropdown-menu profile animated fadeIn">
-                            {{# if login}}
+                            {{#if isLogin}}
                             <li class="last">
-                                <a href="admin/logout">
+                                <a href="/admin/logout">
                                     <i class="fa fa-lock"></i>
                                     Đăng xuất
                                 </a>
@@ -73,11 +62,11 @@
                     </div>
                     <div class="profile-details col-xs-8">
                         <h3>
-                            <a class="name">{{user.email}}</a>
+                            <a class="name">{{data.email}}</a>
                             <!-- Available statuses: online, idle, busy, away and offline -->
                             <span class="profile-status online"></span>
                         </h3>
-                        <p class="profile-title">Web dành cho nhà phát triển</p>
+                        <p class="profile-title">Fresh Food Management</p>
                     </div>
                 </div>
                 <!-- USER INFO - END -->
@@ -97,10 +86,10 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="/admin/cate/danh-sach.html">Danh Sách</a>
+                                <a class="" href="/admin/cate/List">Danh Sách</a>
                             </li>
                             <li>
-                                <a class="" href="/admin/cate/them-cate.html">Thêm</a>
+                                <a class="" href="/admin/cate/Add">Thêm</a>
                             </li>
                         </ul>
                     </li>
@@ -112,10 +101,10 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="/admin/product/danh-sach.html">Danh Sách</a>
+                                <a class="" href="/admin/product/List">Danh Sách</a>
                             </li>
                             <li>
-                                <a class="" href="/admin/product/them-product.html">Thêm</a>
+                                <a class="" href="/admin/product/Add">Thêm</a>
                             </li>
                         </ul>
                     </li>
@@ -128,7 +117,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="admin/cart/danh-sach.html">Danh Sách</a>
+                                <a class="" href="admin/cart/list">Danh Sách</a>
                             </li>
                         </ul>
                     </li>
@@ -140,7 +129,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="admin/user/danh-sach.html">Danh Sách</a>
+                               <a class="" href="/admin/user/List">Danh Sách</a>
                             </li>
                         </ul>
                     </li>

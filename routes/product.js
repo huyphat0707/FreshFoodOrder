@@ -10,17 +10,17 @@ const uploadImage = require('../config/multer.js');
 const product = require('../models/product.js');
 
 
-router.get('/', function (req, res) {
-	res.redirect('/admin/product/danh-sach', { layout: false });
+router.get('/',isLoggedIn, function (req, res) {
+	res.redirect('/admin/product/List', { layout: false });
 });
 
-router.get('/them-product.html', (req, res) => {
+router.get('/add',isLoggedIn, (req, res) => {
 	Cate.find().then(function (cate) {
-		res.render('admin/product/them', { errors: null, cate: cate, layout: false });
+		res.render('admin/product/Add', { errors: null, cate: cate, layout: false });
 	});
 
 });
-router.post('/them-product.html', uploadImage.single('image'), function (req, res, next) {
+router.post('/add',isLoggedIn, uploadImage.single('image'), function (req, res, next) {
 	const file = req.file
 	if (!file) {
 		const error = new Error('Please upload a file')
@@ -42,57 +42,62 @@ router.post('/them-product.html', uploadImage.single('image'), function (req, re
 				res.json({ "kq": 0, "errMeg": err });
 			} else {
 				req.flash('succsess_msg', 'Đã Thêm Thành Công');
-				res.redirect('/admin/product/danh-sach.html');
+				res.redirect('/admin/product/List');
 			}
 		});
 	}
 
 })
 
-router.get('/danh-sach.html', function (req, res) {
+router.get('/list',isLoggedIn, function (req, res) {
 	Product.find().then(function (pro, err) {
 		if (err) {
 			res.json({ 'kq': 0 })
 		} else {
-			res.render('admin/product/danh-sach', { layout: false, product: pro });
+			res.render('admin/product/List', { layout: false, product: pro });
 		}
 	});
 });
-router.get('/:id/sua-product.html', function (req, res) {
+router.get('/:id/edit',isLoggedIn, function (req, res) {
 	Product.findById(req.params.id, function (err, data) {
 		Cate.find().then(function (cate) {
-			res.render('admin/product/sua', { errors: null, product: data, cate: cate, layout: false });
+			res.render('admin/product/Edit', { errors: null, product: data, cate: cate, layout: false });
 		});
 	});
 });
-router.post('/:id/sua-product.html', uploadImage.single('image'), async (req, res, next) => {
+router.post('/:id/edit',isLoggedIn, uploadImage.single('image'), async (req, res, next) => {
 	const { id } = req.params;
-	const { categoryUp , name , price  ,description} = req.body;
+	const { categoryUp, name, price, description } = req.body;
 	try {
 		const pro = await Product.findByIdAndUpdate(id, {
 			Image: req.file.filename,
-			CateId : categoryUp,
+			CateId: categoryUp,
 			Name: name,
 			Price: price,
 			Description: description,
 		});
 		pro.save();
-		res.redirect('/admin/product/danh-sach.html');
+		res.redirect('/admin/product/List');
 	} catch (error) {
 		console.log(error)
 		res.send(error)
 	}
 });
-router.get('/:id/xoa-product.html', (req, res) => {
+router.get('/:id/delete',isLoggedIn, (req, res) => {
 	Product.findById(req.params.id).remove(function (err) {
 		if (err) {
 			res.json({ "kq": 0, 'error': err });
 		} else {
 			req.flash('succsess_msg', 'Đã Xoá Thành Công');
-			res.redirect('/admin/product/danh-sach.html');
+			res.redirect('/admin/product/List');
 		}
 	})
 })
 module.exports = router;
 
-
+function isLoggedIn(req, res, next) {
+	if (req.isAuthenticated() && req.user.roles === 'ADMIN') {
+		return next();
+	} else
+		res.redirect('/');
+};
