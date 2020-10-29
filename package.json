@@ -2,7 +2,7 @@
   "name": "serveorder",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "serve.js",
   "watch": {
     "build": "public/js/main.js"
   },
@@ -33,6 +33,7 @@
     "express-session": "^1.17.1",
     "express-validator": "^5.3.1",
     "file-loader": "^6.1.0",
+    "global": "^4.4.0",
     "gulp": "^4.0.2",
     "gulp-csso": "^4.0.1",
     "gulp-sass": "^4.1.0",
