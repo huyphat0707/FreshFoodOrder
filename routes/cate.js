@@ -44,7 +44,7 @@ router.get('/:id/delete',isLoggedIn, (req, res, next) => {
 		if (err) {
 			res.json({ "kq": 0, 'error': err });
 		} else {
-			Product.find({ _id: req.params.id }, (err, pro) => {
+			Product.find({ name:req.body.oldCat }, (err, pro) => {
 				console.log(pro);
 			})
 			req.flash('succsess_msg', 'Đã Xoá Thành Công');

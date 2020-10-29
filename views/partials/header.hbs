@@ -1,21 +1,43 @@
 <div class="partials__header">
     <nav class="navbar navbar-expand-sm navbar-light ">
         <a class="navbar-brand" href="#"> <img class="partials__header-logo" src="/img/logoo.png" alt=""> </a>
-        {{!-- <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button> --}}
-        <div class="collapse navbar-collapse " id="collapsibleNavId">
-            <form class="form-inline form">
-                <div class="">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </div>
-                <div class="partials__header-cart" >
-                    <img src="/img/cart.png" alt=""></img>
-                    <a href="">Gio hang</a>
-                </div>
-            </form>
+        <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+            <ul class="nav navbar-nav menu_nav ml-auto">
+                <li class="nav-item "><a class="nav-link" href="/">Trang chủ</a></li>
+                <li class="nav-item "><a class="nav-link" href="/product">Sản phẩm</a></li>
+                {{!-- {{#if login}} --}}
+                <li class="nav-item submenu dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                        aria-haspopup="true" aria-expanded="false">Tài khoản</a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item"><a class="nav-link" href="../user/logout">Đăng xuất</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../user/profile">Thông tin tài khoản</a></li>
+                    </ul>
+                </li>
+
+                {{!-- {{else}} --}}
+                <li class="nav-item"><a class="nav-link" href="../user/login">Đăng nhập</a></li>
+                {{!-- {{/if}} --}}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {{!-- {{#if login}} --}}
+                <li class="nav-item"><a href="/cart" class="cart">Gio Hang <span
+                            class="ti-bag">{{session.cart.SoLuong}}</span></a></li>
+                {{!-- {{else}} --}}
+                <li class="nav-item"><a href="../user/login" class="cart"><span
+                            class="ti-bag">{{session.cart.SoLuong}}</span></a></li>
+                {{!-- {{/if}} --}}
+                <li class="nav-item">
+                    <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
+                </li>
+            </ul>
+        </div>
+        <div class="search_input" id="search_input_box">
+            <div class="container">
+                <form action="" method="post" class="d-flex justify-content-between">
+                    <input type="text" class="form-control" id="find" name="find" placeholder="Search Here">
+                </form>
+            </div>
         </div>
 
     </nav>

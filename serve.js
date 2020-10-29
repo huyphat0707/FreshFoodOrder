@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const Handlebars = require('handlebars')
 var flash = require('connect-flash');
+app.use(flash());
 var session = require('express-session');
 var createError = require('http-errors');
 var bodyParser = require('body-parser');
@@ -18,6 +19,7 @@ var product = require('./routes/product');
 var cate = require('./routes/cate');
 var user = require('./routes/user');
 var users = require('./routes/userAdmin');
+var indexRouter = require('./routes/index');
 
 
 //connect mongoose
@@ -30,6 +32,10 @@ useUnifiedTopology: true ,useFindAndModify: false}, function (err) {
     console.log("Mongoose connected successful")
   }
 });
+
+// app.use(function(req, res, next) {
+//   next(createError(404));
+// });
 
 //body-parser
 app.use(bodyParser.json());
@@ -68,13 +74,12 @@ app.use(function(req, res, next){
 app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport');
-app.use(flash());
 app.use('/admin', admin);
 app.use('/admin/product', product);
 app.use('/admin/cate', cate);
 app.use('/admin/user', users);
 app.use('/user', user);
-// app.use('/', indexRouter);
+app.use('/', indexRouter);
 
 //serving static files
 // app.use(express.static('public'));
