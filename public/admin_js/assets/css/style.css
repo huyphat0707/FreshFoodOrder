@@ -247,7 +247,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 blockquote, .blockquote-reverse, blockquote.pull-right {
     font-size: 16px;
-    border-color:lime;
+    border-color: #3F51B5;
 }
 blockquote.pull-right {
     width: 100%;
@@ -272,15 +272,15 @@ blockquote.background {
     border-color: #eaeaea;
 }
 .well.primary, .well.primary * {
-    background-color:lime;
+    background-color: #3F51B5;
     color: #ffffff;
-    border-color:lime;
+    border-color: #3F51B5;
 }
 .well.transparent {
     background-color: transparent;
 }
 a {
-    color:lime;
+    color: #3F51B5;
 }
 a:hover, a:focus {
     color: #333333;
@@ -379,8 +379,8 @@ a:hover, a:focus {
     width: 17px;
     height: 17px;
     border: solid 3px transparent;
-    border-top-color:lime;
-    border-left-color:lime;
+    border-top-color: #3f51b5;
+    border-left-color: #3f51b5;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -393,7 +393,7 @@ a:hover, a:focus {
     min-height: 60px;
     position: fixed;
     width: 100%;
-    background-color:lime;
+    background-color: #3F51B5;
     top: 0px;
     left: 0px;
     z-index: 1999;
@@ -406,7 +406,7 @@ a:hover, a:focus {
 }
 .page-topbar .logo-area {
     width: 260px;
-    background-color:lime;
+    background-color: #3F51B5;
     display: block;
     min-height: 60px;
     float: left;
@@ -848,7 +848,7 @@ a:hover, a:focus {
 }
 #main-menu-wrapper li.open .sub-menu a.active, #main-menu-wrapper li.open .sub-menu a:hover, #main-menu-wrapper li .sub-menu a:hover {
     background-color: rgba(33, 33, 33, 0.1);
-    border-left: 4px solidlime;
+    border-left: 4px solid #3F51B5;
 }
 
 #main-menu-wrapper li.open .sub-menu a{
@@ -857,12 +857,12 @@ a:hover, a:focus {
 
 #main-menu-wrapper li a:hover {
     background-color: rgba(33, 33, 33, 0.1);
-    border-left: 4px solidlime;
+    border-left: 4px solid #3F51B5;
     /*color: #ffffff;*/
 }
 #main-menu-wrapper li.open a {
     background-color: rgba(33, 33, 33, 0.1);
-    border-left: 4px solidlime;
+    border-left: 4px solid #3F51B5;
 }
 #main-menu-wrapper li a:hover .arrow:before, #main-menu-wrapper li.open a .arrow:before {
     color: #757575;
@@ -1215,7 +1215,7 @@ section.box.transparent {
 section.transparent header {
     background-color: transparent;
     border: 1px solid #e8e8e8;
-    border-bottom: 2px solidlime;
+    border-bottom: 2px solid #3f51b5;
 }
 section.transparent .content-body {
     background-color: transparent;
@@ -1231,7 +1231,7 @@ section.box.inverted {
 section.inverted header {
     background-color: rgba(50, 50, 58, 0.8);
     border: 1px solid #333333;
-    border-bottom: 2px solidlime;
+    border-bottom: 2px solid #3f51b5;
     color: #cccccc;
 }
 section.inverted header .title {
@@ -1246,9 +1246,9 @@ section.inverted .content-body {
 /*----all colors----*/
 
 section.primary header {
-    background-color:lime;
-    border: 1px solid lime;
-    border-bottom: 2px solidlime;
+    background-color: #3f51b5;
+    border: 1px solid #3f51b5;
+    border-bottom: 2px solid #3f51b5;
     color: #f5f5f5;
 }
 section.purple header {
@@ -5097,10 +5097,10 @@ code {
 /*collapsed menu and chat open states*/
 
 .page-topbar.sidebar_shift .logo-area {
-    background-color: lime;
+    background-color: #3f51b5;
 }
 .page-topbar.chat_shift .logo-area {
-    background-color: lime;
+    background-color: #3f51b5;
 }
 .chatapi-windows.hideit {
     bottom: -300px;
