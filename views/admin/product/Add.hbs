@@ -121,7 +121,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="../cart/list">Danh Sách</a>
+                                <a class="" href="../bill/list">Danh Sách</a>
                             </li>
                         </ul>
                     </li>
@@ -213,7 +213,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-9 col-md-8 padding-bottom-30">
                                         <div class="form-group">
-                                            <label class="form-label" for="field-120334">Giá</label>
+                                            <label class="form-label" for="field-120334">Giá (vnđ)</label>
                                             <span class="desc"></span>
                                             <div class="controls">
                                                 <input type="number" id="price" value="0" min="0" class="form-control"
@@ -223,11 +223,21 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-9 col-md-8 padding-bottom-30">
                                         <div class="form-group">
+                                            <label class="form-label" for="field-120334">Loại mua</label>
+                                            <span class="desc"></span>
+                                            <div class="controls">
+                                                <textarea name="typeBuy" id="description" class="form-control autogrow"
+                                                    cols="5" rows="1"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-9 col-md-8 padding-bottom-30">
+                                        <div class="form-group">
                                             <label class="form-label" for="field-120334">Chi Tiết Sản Phẩm</label>
                                             <span class="desc"></span>
                                             <div class="controls">
                                                 <textarea name="description" id="description" class="form-control autogrow"
-                                                    cols="5"></textarea>
+                                                    cols="5" rows="6"></textarea>
                                             </div>
                                         </div>
                                     </div>

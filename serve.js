@@ -18,7 +18,8 @@ var product = require('./routes/product');
 var cate = require('./routes/cate');
 var user = require('./routes/user');
 var users = require('./routes/userAdmin');
-
+let bill = require('./routes/bill');
+let billDetail = require('./routes/billDetail');
 
 //connect mongoose
 const mongoose = require('mongoose');
@@ -74,7 +75,15 @@ app.use('/admin/product', product);
 app.use('/admin/cate', cate);
 app.use('/admin/user', users);
 app.use('/user', user);
+app.use('/admin/bill', bill);
+app.use('/admin/billDetail', billDetail);
 // app.use('/', indexRouter);
+
+//api
+app.use('/api/product', require('./api/product'));
+app.use('/api/cate', require('./api/cate'));
+app.use('/api/bill', require('./api/bill'));
+app.use('/api/billDetail', require('./api/billDetail'));
 
 //serving static files
 // app.use(express.static('public'));

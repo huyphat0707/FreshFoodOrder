@@ -122,7 +122,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="/admin/cart/list">Danh Sách</a>
+                                <a class="" href="/admin/bill/list">Danh Sách</a>
                             </li>
                         </ul>
                     </li>
@@ -211,6 +211,16 @@
                                             </div>
                                         </div>
                                     </div>
+                                     <div class="col-xs-12 col-sm-9 col-md-8 padding-bottom-30">
+                                        <div class="form-group">
+                                            <label class="form-label" for="field-120334">Loại Mua</label>
+                                            <span class="desc"></span>
+                                            <div class="controls">
+                                                <input type="text" id="typeBuy" value="{{product.typeBuy}}" min="0"
+                                                    class="form-control" name="typeBuy">
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-xs-12 col-sm-9 col-md-8 padding-bottom-30">
                                         <div class="form-group">
                                             <label class="form-label" for="field-120334">Thể Loại</label>
@@ -232,6 +242,36 @@
                                             <div class="controls">
                                                 <textarea name="description" id="description" class="form-control autogrow"
                                                     cols="5">{{product.Description}}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-9 col-md-8 padding-bottom-30">
+                                        <div class="form-group">
+                                            <label class="form-label" for="field-120334">Lưu trữ</label>
+                                            <span class="desc"></span>
+                                            <div class="controls">
+                                                <textarea name="storage" id="storage" class="form-control autogrow"
+                                                    cols="5" rows="2">{{product.Storage}}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-9 col-md-8 padding-bottom-30">
+                                        <div class="form-group">
+                                            <label class="form-label" for="field-120334">Xuất xứ</label>
+                                            <span class="desc"></span>
+                                            <div class="controls">
+                                                <textarea name="origin" id="origin" class="form-control autogrow"
+                                                    cols="5" rows="1">{{product.Origin}}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-9 col-md-8 padding-bottom-30">
+                                        <div class="form-group">
+                                            <label class="form-label" for="field-120334">Cách dùng</label>
+                                            <span class="desc"></span>
+                                            <div class="controls">
+                                                <textarea name="usage" id="usage" class="form-control autogrow"
+                                                    cols="5">{{product.Usage}}</textarea>
                                             </div>
                                         </div>
                                     </div>
