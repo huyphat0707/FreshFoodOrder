@@ -9,74 +9,48 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row pages__mainuser">
 				{{#each products}}
 				<div class="col-lg-3 col-md-6">
 					<div class="single-product">
-						<img width="250px" height=" 250px" src="/upload/{{this.Image}}" alt="">
+						<img class="img" src="/upload/{{this.Image}}" alt="">
 						<div class="product-details">
-							<h6>{{this.Name}}</h6>
-							<div class="price">
-								<h6>${{this.Price}}</h6>
-							</div>
-							<div class="prd-bottom">
-
-								<a href="/cart/{{this._id}}" class="social-info islogin">
-									<span class="ti-bag"></span>
-									<p class="hover-text">Thêm vào giỏ </p>
-								</a>
-
-								<a href="/detail/{{this._id}}" class="social-info">
-									<span class="lnr lnr-move"></span>
-									<p class="hover-text">Xem chi tiết</p>
-								</a>
+							<a href="/detail/{{this._id}}">
+								<div class="bases__text-bold bases__font--18">{{this.Name}}</div>
+							</a>
+							<div class="pro_bottom d-flex align-items-center">
+								<div class="bases__text-bold text-danger">
+									<div>${{this.Price}}</div>
+								</div>
+								<div class="">
+									<a href="/cart/{{this._id}}" class="islogin">
+										<button class="bases__btn btn-table ">
+											<img class="bases__icon-sm" src="/img/cart.png" />
+										</button>
+									</a>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				{{/each}}
 			</div>
+			{{!-- {{#if current}} --}}
+				<div class="pagination justify-content-center">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item " ><a class="page-link" href="#">Previous</a></li>
+							<li class="page-item "><a class="page-link " href="/">1</a></li>
+							<li class="page-item (class = active ? 'active' : '')"><a class="page-link" href='/?page='>2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#">Next</a></li>
+						</ul>
+					</nav>
+				</div>
+			{{!-- {{/if}} --}}
 
 		</div>
 	</div>
-	<div class="single-product-slider">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-6 text-center">
-					<div class="section-title">
-						<h1>Sản phẩm sắp tới</h1>
-						<p></p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				{{# products}}
-				<div class="col-lg-3 col-md-6">
-					<div class="single-product">
-						<img width="250px" height=" 250px" src="/upload/{{this.Image}}" alt="">
-						<div class="product-details">
-							<h6>{{this.Name}}</h6>
-							<div class="price">
-								<h6>${{this.Price}}</h6>
-							</div>
-							<div class="prd-bottom">
-								<a href="/cart/{{this._id}}" class="social-info islogin">
-									<span class="ti-bag"></span>
-									<p class="hover-text">Thêm vào giỏ</p>
-								</a>
-								<a href="/detail/{{this._id}}" class="social-info">
-									<span class="lnr lnr-move"></span>
-									<p class="hover-text">Xem chi tiết</p>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				{{/ products}}
-			</div>
-		</div>
-	</div>
-
 </section>
 <script src="js/jquery.js"></script>
 <script>

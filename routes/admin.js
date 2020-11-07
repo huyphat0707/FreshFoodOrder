@@ -9,8 +9,6 @@ router.get('/logout', isLoggedIn, function (req, res, next) {
   res.redirect('/admin/login');
 });
 
-
-
 router.get('/login', notisLoggedIn, function (req, res, next) {
   var messages = req.flash('error');
   res.render('admin/login/login_ad', {

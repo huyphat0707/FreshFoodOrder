@@ -2,7 +2,8 @@ const express = require('express');
 const expressHbs = require("express-handlebars");
 const app = express();
 const port = process.env.PORT || 3000;
-const Handlebars = require('handlebars')
+const Handlebars = require('handlebars');
+const cors = require('cors');
 var flash = require('connect-flash');
 app.use(flash());
 var session = require('express-session');
@@ -13,6 +14,7 @@ const expressValidator = require('express-validator');
 app.use(expressValidator());
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 const passport = require('passport');
+const Cart = require('./models/cart');
 
 var admin = require('./routes/admin');
 var product = require('./routes/product');
@@ -20,12 +22,18 @@ var cate = require('./routes/cate');
 var user = require('./routes/user');
 var users = require('./routes/userAdmin');
 var indexRouter = require('./routes/index');
+var cart = require('./routes/cart');
 
 
 //connect mongoose
+app.use(cors());
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://admin:0joIlgGzoKMMEagE@cluster0.adn4g.mongodb.net/FreshVegetablemanager?retryWrites=true&w=majority', { useNewUrlParser: true, 
-useUnifiedTopology: true ,useFindAndModify: false}, function (err) {
+ mongoose.connect('mongodb+srv://admin:0joIlgGzoKMMEagE@cluster0.adn4g.mongodb.net/FreshVegetablemanager?retryWrites=true&w=majority', 
+ {
+    useNewUrlParser: true, 
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+}, function (err) {
   if (err) {
     console.log("Mongoose connect err" + err)
   } else {
@@ -59,15 +67,17 @@ app.engine(
 );
 //Lưu dữ liệu phiên đăng nhập
 app.use(session({
-  secret: 'secret',
-  saveUninitialized: true,
-  resave: true
-}));
+  resave: true, 
+  saveUninitialized: true, 
+  secret: 'somesecret', 
+  cookie: { maxAge: 60000 }}));
 
 app.use(function(req, res, next){
   res.locals.login = req.isAuthenticated();
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+  req.session.cart = cart;
   res.locals.session = req.session;
-  // res.locals.succsess_msg = req.flash('succsess_msg');
+  res.locals.succsess_msg = req.flash('succsess_msg');
   res.locals.user = req.user;
   next();
 });
@@ -77,6 +87,7 @@ require('./config/passport');
 app.use('/admin', admin);
 app.use('/admin/product', product);
 app.use('/admin/cate', cate);
+app.use('/admin/cart', cart);
 app.use('/admin/user', users);
 app.use('/user', user);
 app.use('/', indexRouter);

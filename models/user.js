@@ -3,11 +3,37 @@ var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 
 var userSchema = new Schema({
-	username: { type: String, trim: true, required: true },
-	email: { type: String, unique: true, trim: true, required: true },
-	password: { type: String, trim: true, required: true },
-	phone: { type: Number, trim: true, required: true },
-	roles: { type: String, default: 'MEMBER', trim: true, required: true },
+	username: {
+		type: String,
+		trim: true,
+		required: true
+	},
+	email: {
+		type: String,
+		unique: true,
+		trim: true,
+		required: true
+	},
+	password: {
+		type: String,
+		trim: true,
+		required: true
+	},
+	phone: {
+		type: Number,
+		trim: true,
+		required: true
+	},
+	roles: {
+		type: String,
+		default: 'MEMBER',
+		trim: true,
+		required: true
+	},
+	date: {
+		type: Date,
+		default: Date.now
+	}
 });
 
 // Các phương thức ======================

@@ -7,7 +7,6 @@ var fs = require('fs');
 var Product = require('../models/product.js');
 var Cate = require('../models/cate.js');
 const uploadImage = require('../config/multer.js');
-const product = require('../models/product.js');
 
 
 router.get('/',isLoggedIn, function (req, res) {

@@ -3,16 +3,21 @@ var User = require('../models/user');
 var LocalStrategy = require('passport-local').Strategy;
 
 
-passport.serializeUser(function(user, done){
-    done(null, user.id);
-});
+passport.serializeUser(function(user, done) {
+    done(null, user._id);
+  });
 
-passport.deserializeUser(function(id, done){
-    User.findById(id, function(err, user){
-        done(err, user);
-    }); 
-});
-
+  passport.deserializeUser(function(id, done) {
+    User.findOne({
+      _id: id
+    })
+      .then(function(user) {
+        done(null, user);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  });
 //đăng ký
 passport.use('local.registration', new LocalStrategy({
     usernameField: 'email',
@@ -86,7 +91,6 @@ passport.use('local.login', new LocalStrategy({
         }
         req.session.user = user ? true : false;
         return done(null, user);
-        
     });
 }));
 
