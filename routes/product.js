@@ -3,7 +3,6 @@ var router = express.Router();
 var multer = require('multer');
 var fs = require('fs');
 
-
 var Product = require('../models/product.js');
 var Cate = require('../models/cate.js');
 const uploadImage = require('../config/multer.js');
@@ -31,6 +30,7 @@ router.post('/add',isLoggedIn, uploadImage.single('image'), function (req, res, 
 			Name: req.body.name,
 			Image: req.file.filename,
 			Price: req.body.price,
+			typeBuy: req.body.typeBuy,
 			Description: req.body.description,
 			Storage: req.body.storage,
 			Origin: req.body.origin,
@@ -46,7 +46,7 @@ router.post('/add',isLoggedIn, uploadImage.single('image'), function (req, res, 
 		});
 	}
 
-})
+});
 
 router.get('/list',isLoggedIn, function (req, res) {
 	Product.find().then(function (pro, err) {
@@ -59,6 +59,7 @@ router.get('/list',isLoggedIn, function (req, res) {
 });
 router.get('/:id/edit',isLoggedIn, function (req, res) {
 	Product.findById(req.params.id, function (err, data) {
+		
 		Cate.find().then(function (cate) {
 			res.render('admin/product/Edit', { errors: null, product: data, cate: cate, layout: false });
 		});
@@ -66,14 +67,18 @@ router.get('/:id/edit',isLoggedIn, function (req, res) {
 });
 router.post('/:id/edit',isLoggedIn, uploadImage.single('image'), async (req, res, next) => {
 	const { id } = req.params;
-	const { categoryUp, name, price, description } = req.body;
+	const { categoryUp, name, price, typeBuy, description, storage, origin, usage } = req.body;
 	try {
 		const pro = await Product.findByIdAndUpdate(id, {
 			Image: req.file.filename,
 			CateId: categoryUp,
 			Name: name,
 			Price: price,
+			typeBuy: typeBuy,
 			Description: description,
+			Storage: storage,
+			Origin: origin,
+			Usage: usage,
 		});
 		pro.save();
 		res.redirect('/admin/product/List');
@@ -95,7 +100,7 @@ router.get('/:id/delete',isLoggedIn, (req, res) => {
 module.exports = router;
 
 function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated() && req.user.roles === 'ADMIN') {
+	if (req.isAuthenticated() && req.user.roles === 1) {
 		return next();
 	} else
 		res.redirect('/');

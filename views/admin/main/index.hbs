@@ -36,14 +36,20 @@
                             <span class="name"> <i class="fa fa-angle-down"></i></span>
                         </a>
                         <ul class="dropdown-menu profile animated fadeIn">
-                            {{#if login_ad}}
+                            {{!-- {{#if login_ad}} --}}
                             <li class="last">
                                 <a href="/admin/logout">
                                     <i class="fa fa-lock"></i>
                                     Đăng xuất
                                 </a>
                             </li>
-                            {{/if}}
+                            <li class="last">
+                                <a href="/admin/changePass">
+                                    <i class="fa fa-lock"></i>
+                                    Đổi mật khẩu
+                                </a>
+                            </li>
+                            {{!-- {{/if}} --}}
                         </ul>
                     </li>
                 </ul>
@@ -117,7 +123,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="admin/cart/list">Danh Sách</a>
+                                <a class="" href="admin/bill/list">Danh Sách</a>
                             </li>
                         </ul>
                     </li>

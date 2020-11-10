@@ -10,13 +10,13 @@ router.get('/add',isLoggedIn, (req, res, next) => {
 })
 router.post('/add',isLoggedIn, uploadImage.single('imgCate'), (req, res, next) => {
 	const file = req.file
-	console.log(file);
 	if (!file) {
 		const error = new Error('Please upload a file')
 		error.httpStatusCode = 400
 		return next(error)
 	} else {
 		var cate = new Cate({
+			id: req.body.id,
 			imgCate: req.file.filename,
 			name: req.body.nameCate,
 		});
@@ -76,7 +76,7 @@ router.post('/:id/edit',isLoggedIn, uploadImage.single('imgCate'), async (req, r
 module.exports = router;
 
 function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated() && req.user.roles === 'ADMIN') {
+	if (req.isAuthenticated() && req.user.roles === 1) {
 		return next();
 	} else
 		res.redirect('/');

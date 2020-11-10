@@ -7,24 +7,23 @@ var Cate = require('../models/cate');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    let perPage = 8; // số lượng sản phẩm xuất hiện trên 1 page
-    let page = req.params.page || 1; 
-  
-    Product
-      .find()
-      .skip((perPage * page) - perPage)
-      .limit(perPage)
-      .exec((err, products) => {
-        Product.countDocuments((err, count) => { 
-          if (err) return next(err);
-           res.render('shop/index',  {
-            products: products, 
-            current: page,
-            pages: Math.ceil(count / perPage)
-          });
-        });
-      });
+    var perPage = 8
+    var page = req.params.page || 1
 
+    Product
+        .find({})
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec(function (err, products) {
+            Product.count().exec(function (err, count) {
+                if (err) return next(err)
+                res.render('shop/index', {
+                    products: products,
+                    current: page,
+                    pages: Math.ceil(count / perPage)
+                })
+            })
+        })
 });
 
 //category
@@ -63,7 +62,7 @@ router.post('/detail/:id', function (req, res) {
 
 // add product to cart
 router.get('/cart/:id', function (req, res, next) {
-    Product.findOne(req.params.id, function(err){
+    Product.findOne(req.params.id, function (err) {
         console.log(req.params.id);
     })
     // var prodId = req.params.productId;

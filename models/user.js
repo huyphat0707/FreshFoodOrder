@@ -25,15 +25,18 @@ var userSchema = new Schema({
 		required: true
 	},
 	roles: {
-		type: String,
-		default: 'MEMBER',
+		type: Number,
+		default: 0,
 		trim: true,
-		required: true
 	},
 	date: {
 		type: Date,
 		default: Date.now
-	}
+	},
+	verify_token: {
+		type: String,
+		required: false
+	  },
 });
 
 // Các phương thức ======================
@@ -48,7 +51,7 @@ userSchema.methods.validPassword = function (password) {
 };
 
 userSchema.methods.isGroupAdmin = function (checkRole) {
-	if (checkRole === 'ADMIN') {
+	if (checkRole === 1) {
 		return true;
 	} else {
 		return false;

@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const Handlebars = require('handlebars');
 const cors = require('cors');
+var passport = require('passport');
 var flash = require('connect-flash');
 app.use(flash());
 var session = require('express-session');
@@ -13,8 +14,6 @@ var express_handlebars_sections = require('express-handlebars-sections');
 const expressValidator = require('express-validator');
 app.use(expressValidator());
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
-const passport = require('passport');
-const Cart = require('./models/cart');
 
 var admin = require('./routes/admin');
 var product = require('./routes/product');
@@ -22,8 +21,9 @@ var cate = require('./routes/cate');
 var user = require('./routes/user');
 var users = require('./routes/userAdmin');
 var indexRouter = require('./routes/index');
-var cart = require('./routes/cart');
 
+let bill = require('./routes/bill');
+let billDetail = require('./routes/billDetail');
 
 //connect mongoose
 app.use(cors());
@@ -69,13 +69,11 @@ app.engine(
 app.use(session({
   resave: true, 
   saveUninitialized: true, 
-  secret: 'somesecret', 
+  secret: 'secret', 
   cookie: { maxAge: 60000 }}));
 
 app.use(function(req, res, next){
   res.locals.login = req.isAuthenticated();
-  var cart = new Cart(req.session.cart ? req.session.cart : {});
-  req.session.cart = cart;
   res.locals.session = req.session;
   res.locals.succsess_msg = req.flash('succsess_msg');
   res.locals.user = req.user;
@@ -87,10 +85,18 @@ require('./config/passport');
 app.use('/admin', admin);
 app.use('/admin/product', product);
 app.use('/admin/cate', cate);
-app.use('/admin/cart', cart);
 app.use('/admin/user', users);
 app.use('/user', user);
 app.use('/', indexRouter);
+app.use('/admin/bill', bill);
+app.use('/admin/billDetail', billDetail);
+// app.use('/', indexRouter);
+
+//api
+app.use('/api/product', require('./api/product'));
+app.use('/api/cate', require('./api/cate'));
+app.use('/api/bill', require('./api/bill'));
+app.use('/api/billDetail', require('./api/billDetail'));
 
 //serving static files
 // app.use(express.static('public'));
