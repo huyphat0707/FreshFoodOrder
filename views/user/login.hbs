@@ -1,18 +1,14 @@
-<section class="banner-area organic-breadcrumb">
-	<div class="container">
-		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-start">
+{{!-- <section class="base__box">
+	<div class="body">
+		<div class="heading">
 			<div class="col-first">
 				<h1>Đăng Nhập</h1>
 			</div>
 		</div>
-	</div>
-</section>
-<section class="login_box_area section_gap">
-	<div class="container">
 		<div class="row align-items-center">
 			<div class="col-6">
 				<div class="login_box_img">
-					<img class="img-fluid" src="/img/logoo.png" alt="">
+					<img class="img-fluid" src="/img/logoo.png" width="100" height="100" alt="">
 					<div class="hover">
 						<h4>Bạn chưa có tài khoản?</h4>
 						<p>Vui lòng ấn vào nút đăng ký !! </p>
@@ -45,8 +41,58 @@
 						</div>
 					</form>
 				</div>
-			</div>
-			
+			</div>	
 		</div>
 	</div>
-</section>
+</section> --}}
+<form action="login" method="POST" novalidate="novalidate">
+	<div class="bases__box">
+		<div class="heading">
+			<div class="d-flex align-items-center">
+				<img class="bases__icon-sm mr-3" src="/img/logoo.png" />
+				<div class="bases__font--20 bases__text-bold">
+					Đăng nhập
+				</div>
+			</div>
+		</div>
+		<div class="body">
+			<!-- radio -->
+			{{#if hasErrors}}
+			<div class="alert alert-danger">
+				{{# each messages}}
+				<p>{{this}}</p>
+				{{/each}}
+			</div>
+			{{/if}}
+			<div class="row align-items-center">
+				<div class="bases__col-left pl-0">
+					Email:
+				</div>
+				<div class="bases__col-right pr-0 d-flex">
+					<input class="w-100" type="email" id="email" maxlength="255" name="email" required />
+				</div>
+			</div>
+			<div class="row align-items-center">
+				<div class="bases__col-left pl-0">
+					Password:
+				</div>
+				<div class="bases__col-right pr-0 d-flex">
+					<input class="w-100" type="password" maxlength="255" name="Password" required />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="d-flex justify-content-center">
+		<a class="mr-4" href="/user/registration">
+			<button class="bases__btn btn-submit d-flex align-items-center" type="button">
+				<i class="bases__font--12 bases__rotate-reverse fas fa-play mr-1"></i>
+				<span class="bases__font--16">Register</span>
+			</button>
+		</a>
+		<input type="hidden" , name="_csrf" value="{{csrfToken}}">
+		<button type="submit" class="bases__btn btn-submit d-flex align-items-center">
+			<span class="bases__font--16">Login</span>
+			<i class="bases__font--12 fas fa-play ml-1"></i>
+		</button>
+	</div>
+</form>

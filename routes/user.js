@@ -2,13 +2,10 @@ var express = require('express');
 var router = express.Router();
 var csrf = require('csurf');
 var passport = require('passport');
-
+const user = require('../models/user');
 var csrfProtec = csrf();
 router.use(csrfProtec);
 
-router.get('/profile', isLoggedIn, function(req, res){
-  res.render('user/profile');
-});
 
 router.get('/logout', isLoggedIn, function(req, res, next){
   req.logout();
@@ -24,7 +21,7 @@ router.use('/', notisLoggedIn, function(req, res, next){
 
 router.get('/registration', function(req, res, next){
   var messages = req.flash('error');
-  res.render('user/registration', {csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0});
+  res.render('user/registration', { csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0});
 });
 
 router.post('/registration', passport.authenticate('local.registration',{
@@ -43,8 +40,13 @@ router.post('/login', passport.authenticate('local.login',{
   failureRedirect: '/user/login',
   failureFlash: true
 }));
-
-
+router.get('/edit',isLoggedIn, function(req, res, next){
+        res.render('user/edit');
+});
+;
+router.post('/:id/edit', isLoggedIn, function(req, res){
+  res.render('user/edit');
+});
 module.exports = router;
 
 function isLoggedIn(req, res, next){

@@ -1,0 +1,28 @@
+.pages {
+    &__mainuser {
+        margin-bottom: 24px;
+        .img {
+            margin-bottom: 10px;
+            object-fit: cover;
+            width: 250px;
+            height: 250px;
+            border: 1px solid;
+            border-color: $color-red;
+            background-color: $color-white;
+            -webkit-filter: blur(1px);
+            filter: blur(1px);
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+            &:hover {
+                -webkit-filter: blur(0);
+                filter: blur(0);
+            }
+        }
+        .price{
+            float: left;
+        }
+        .pro_bottom{
+            margin-bottom: 20px;
+        }
+    }
+}

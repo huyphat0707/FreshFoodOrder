@@ -3,23 +3,6 @@ var router = express.Router();
 
 var User = require('../models/user.js');
 
-router.post('/signup', (req, res) => {
-	const adduser = new User({
-        username: req.body.username,
-		email: req.body.email,
-		password: req.body.password,
-        phone: req.body.phone,
-        roles: req.body.roles,
-	});
-
-	adduser.save((err) => {
-		if (err) {
-			console.log(err);
-			return;
-		}
-	});
-});
-
 router.get('/list',isLoggedIn, (req, res, next) => {
 	User.find().then(function (user, err) {
 		if (!err) {
@@ -57,7 +40,7 @@ router.get('/:id/delete', isLoggedIn, function (req, res, next) {
 module.exports = router;
 
 function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated() && req.user.roles === 'ADMIN') {
+    if (req.isAuthenticated() && req.user.roles === 1) {
         return next();
     } else
         res.redirect('/admin/login');

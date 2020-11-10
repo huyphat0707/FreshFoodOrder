@@ -3,11 +3,40 @@ var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 
 var userSchema = new Schema({
-	username: { type: String, trim: true, required: true },
-	email: { type: String, unique: true, trim: true, required: true },
-	password: { type: String, trim: true, required: true },
-	phone: { type: Number, trim: true, required: true },
-	roles: { type: String, default: 'MEMBER', trim: true, required: true },
+	username: {
+		type: String,
+		trim: true,
+		required: true
+	},
+	email: {
+		type: String,
+		unique: true,
+		trim: true,
+		required: true
+	},
+	password: {
+		type: String,
+		trim: true,
+		required: true
+	},
+	phone: {
+		type: Number,
+		trim: true,
+		required: true
+	},
+	roles: {
+		type: Number,
+		default: 0,
+		trim: true,
+	},
+	date: {
+		type: Date,
+		default: Date.now
+	},
+	verify_token: {
+		type: String,
+		required: false
+	  },
 });
 
 // Các phương thức ======================
@@ -22,7 +51,7 @@ userSchema.methods.validPassword = function (password) {
 };
 
 userSchema.methods.isGroupAdmin = function (checkRole) {
-	if (checkRole === 'ADMIN') {
+	if (checkRole === 1) {
 		return true;
 	} else {
 		return false;
