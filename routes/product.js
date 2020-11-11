@@ -53,7 +53,7 @@ router.get('/list',isLoggedIn, function (req, res) {
 		if (err) {
 			res.json({ 'kq': 0 })
 		} else {
-			res.render('admin/product/List', { layout: false, product: pro });
+			res.render('admin/product/List', { layout: false, product: pro.reverse() }); 
 		}
 	});
 });

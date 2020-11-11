@@ -204,7 +204,7 @@
                                                     <td>{{Price}}</td>
                                                     <td>{{Description}}</td>
                                                     <td>
-                                                        <a href="/admin/product/{{this._id}}/delete"
+                                                        <a href="/admin/product/{{this._id}}/delete" onclick="return confirm('Are you sure to delete this item?')"
                                                             class="bg-danger">Xoá</a> |
                                                         <a href="/admin/product/{{this._id}}/edit"
                                                             class="bg-primary">Sửa</a>

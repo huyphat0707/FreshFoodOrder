@@ -20,7 +20,7 @@ router.get('/list', isLoggedIn, (req, res) => {
         if(err){
             res.json({'kq' : 0});
         }else {
-            res.render('admin/bill/list', { layout: false, bill: listBill });
+            res.render('admin/bill/list', { layout: false, bill: listBill.reverse() });
         }
     })
 });

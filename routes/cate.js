@@ -33,7 +33,7 @@ router.post('/add',isLoggedIn, uploadImage.single('imgCate'), (req, res, next) =
 router.get('/list',isLoggedIn, (req, res, next) => {
 	Cate.find().then(function (cate, err) {
 		if (!err) {
-			res.render('admin/cate/List', { layout: false, data: cate });
+			res.render('admin/cate/List', { layout: false, data: cate.reverse() });
 		} else {
 			res.json({ "kq": 0, 'error': err });
 		}
