@@ -1,0 +1,62 @@
+<form action="" method="POST">
+    <div class="bases__box">
+        <div class="heading">
+            <div class="d-flex align-items-center">
+                <img class="bases__icon-sm mr-3" src="/img/logoo.png" />
+                <div class="bases__font--20 bases__text-bold">
+                    Edit
+                </div>
+            </div>
+        </div>
+        <div class="body">
+            {{#if hasErrors}}
+            <div class="container">
+                <div class="alert alert-danger">
+                    {{# each messages}}
+                    <p>{{this}}</p>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+            <div class="row align-items-center">
+                <div class="bases__col-left pl-0">
+                    Username:
+                </div>
+                <div class="bases__col-right pr-0 d-flex">
+                    <input class="w-100" type="text" id="username" maxlength="255" name="username" required />
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="bases__col-left pl-0">
+                    Email:
+                </div>
+                <div class="bases__col-right pr-0 d-flex">
+                    <input class="w-100" type="email" id="email" maxlength="255" name="email" required />
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="bases__col-left pl-0">
+                    Phone:
+                </div>
+                <div class="bases__col-right pr-0 d-flex">
+                    <input class="w-100" type="number" id="phone" maxlength="255" name="phone" required />
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="bases__col-left pl-0">
+                    Roles:
+                </div>
+                <div class="bases__col-right pr-0 d-flex">
+                    <input class="w-100" type="text" id="roles" maxlength="255" name="roles" readonly value="0"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <input type="hidden", name="_csrf" value="{{csrfToken}}">
+		<button class="bases__btn btn-submit d-flex align-items-center" type="submit">
+			<i class="bases__font--12 fas fa-play mr-1"></i>
+			<span class="bases__font--16">Edit</span>
+		</button>
+	</div>
+</form>

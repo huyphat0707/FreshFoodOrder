@@ -1,0 +1,15 @@
+.pages{
+    &__detailpro{
+        margin-bottom: 50px;
+        .col{
+            &-left{
+                width: 40%;
+                margin-bottom: 50px;
+            }
+            &right{
+                width: 60%;
+            } 
+        }
+
+    }
+}

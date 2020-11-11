@@ -73,7 +73,7 @@ router.get('/:id/delete',isLoggedIn, (req, res) => {
 
 module.exports = router;
 function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated() && req.user.roles === 'ADMIN') {
+	if (req.isAuthenticated() && req.user.roles === 1) {
 		return next();
 	} else
 		res.redirect('/');
