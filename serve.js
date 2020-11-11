@@ -14,6 +14,8 @@ var express_handlebars_sections = require('express-handlebars-sections');
 const expressValidator = require('express-validator');
 app.use(expressValidator());
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 var admin = require('./routes/admin');
 var product = require('./routes/product');

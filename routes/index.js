@@ -8,11 +8,10 @@ var Cate = require('../models/cate');
 /* GET home page. */
 router.get('/', function (req, res, next) {
     var perPage = 8
-    var page = req.params.page || 1
-
+    var page = parseInt(req.query.page) || 1
     Product
         .find({})
-        .skip((perPage * page) - perPage)
+        .skip((page-1) * perPage)
         .limit(perPage)
         .exec(function (err, products) {
             Product.count().exec(function (err, count) {
@@ -20,6 +19,10 @@ router.get('/', function (req, res, next) {
                 res.render('shop/index', {
                     products: products,
                     current: page,
+                    hasNextPage: perPage * page < count,
+                    hasPreviousPage: page > 1,
+                    nextPage: page + 1,
+                    previousPage: page - 1,
                     pages: Math.ceil(count / perPage)
                 })
             })

@@ -112,21 +112,20 @@ passport.use('local.login_ad', new LocalStrategy({
         return done(null, false, req.flash('error', messages));
     };
     
-    User.findOne({'email': email}, function(err, user){
+    User.findOne({'email': email}, function(err, users){
         if(err){
             return done(err);
         }
-        if (!user){
+        if (!users){
             return done(null, false, {message: 'Không tìm thấy người dùng.'});
         }
-        if(!user.validPassword(password)){
+        if(!users.validPassword(password)){
             return done(null, false, {message: 'Sai mật khẩu.'});
         }
-        if(!user.isGroupAdmin(user.roles)){
+        if(!users.isGroupAdmin(users.roles)){
             return done(null, false, {message: 'Bạn không có quyền đăng nhập vào trang administrator, vui lòng quay lạy trang chủ.'});
         }
-        return done(null, user);
-
+        return done(null, users);
     });
 
 }));

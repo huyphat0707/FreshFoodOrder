@@ -7,7 +7,7 @@
     "build": "public/js/main.js"
   },
   "scripts": {
-    "dev": "concurrently --kill-others \"gulp dev\" \"nodemon serve\"",
+    "dev": "concurrently --kill-others \"gulp dev\" \"nodemon --inspect serve\"",
     "start": "concurrently --kill-others \"gulp build\" \"node serve\""
   },
   "author": "",

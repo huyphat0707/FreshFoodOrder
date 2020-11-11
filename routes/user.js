@@ -40,13 +40,7 @@ router.post('/login', passport.authenticate('local.login',{
   failureRedirect: '/user/login',
   failureFlash: true
 }));
-router.get('/edit',isLoggedIn, function(req, res, next){
-        res.render('user/edit');
-});
-;
-router.post('/:id/edit', isLoggedIn, function(req, res){
-  res.render('user/edit');
-});
+
 module.exports = router;
 
 function isLoggedIn(req, res, next){

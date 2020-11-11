@@ -9,7 +9,7 @@ var User = require('../models/user');
 require('dotenv').config();
 
 router.get('/', isLoggedIn, function (req, res) {
-  res.render('admin/main/index', { layout: false });
+  res.render('admin/main/index', { layout: false});
 });
 router.get('/logout', isLoggedIn, function (req, res, next) {
   req.logout();
@@ -24,9 +24,15 @@ router.get('/login', notisLoggedIn, function (req, res, next) {
   });
 });
 
+router.post('/login', passport.authenticate('local.login_ad', {
+  successRedirect: '/admin',
+  failureRedirect: '/admin/login',
+  failureFlash: true,
+}));
+
 router.get('/changePass', function (req, res, next) {
   const messages = req.flash("error");
-  res.render('admin/login/changePassword', { layout: false, messages:messages, hasErrors:messages.length>0 });
+  res.render('admin/login/changePassword', { layout: false, messages: messages, hasErrors: messages.length > 0 });
 })
 router.post('/changePass', function (req, res, next) {
   bcrypt.compare(req.body.oldPass, req.user.password, function (err, result) {
@@ -54,6 +60,7 @@ router.get('/forgotPassword', function (req, res, next) {
       hasErrors: messages.length > 0,
     });
 });
+
 router.post('/forgotPassword', function (req, res, next) {
   const email = req.body.email;
   User.findOne({ email: email }, (err, user) => {
@@ -61,46 +68,37 @@ router.post('/forgotPassword', function (req, res, next) {
       req.flash("error", "Email không tồn tại!");
       return res.redirect("/admin/forgotPassword");
     } else {
-      //nodemailer
-      // SMTP (Simple Mail Transfer Protocol,giao thức truyền tải thư tín đơn giản hóa)
-      let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        host: 'smtp.gmail.com',
-        auth: {
-            user: process.env.EMAIL,
-            pass: process.env.PASSWORD
-        },
-   });
-      var pass = randomString.generate({
-        length: 6
-      });
-      var mainOptions = {
-        from: 'hahuy0707@gmail.com',
-        to: email,
-        subject: "Test",
+      let mailTransporter = nodemailer.createTransport({ 
+        service: 'gmail', 
+        auth: { 
+            user: 'hahuy0707@gmail.com', 
+            pass: 'cris07072000@'
+        } 
+    }); 
+    var pass = randomString.generate({
+      length: 6
+    });
+    let mailDetails = { 
+        from: ' hahuy0707@gmail.com', 
+        to: email, 
+        subject: 'Send Password', 
         html: "<p>Mật khẩu mới của bạn là:</p>" + pass
-      };
-      transporter.sendMail(mainOptions, (err, info) => {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log("Sent:" + info.response);
-          }
-        });
-      // req.user.password = bcrypt.hashSync(req.body.newPass);
-      // req.user.save();
-      // req.flash("messages", "Đổi mật khẩu thành công!");
-      // res.render("admin/login/login_ad", { layout: false });
+    }; 
+      
+    mailTransporter.sendMail(mailDetails, function(err, data) { 
+        if(err) { 
+            console.log('Error Occurs'); 
+        } else { 
+          return res.render("Send email successful");
+        } 
+    }); 
+    user.password = bcrypt.hashSync(pass, bcrypt.genSaltSync(5), null);
+    user.save();
+    res.render("admin/login/login_ad", { layout: false });
     }
   });
 })
 
-
-router.post('/login', passport.authenticate('local.login_ad', {
-  successRedirect: '/admin',
-  failureRedirect: '/admin/login',
-  failureFlash: true
-}));
 
 
 module.exports = router;
