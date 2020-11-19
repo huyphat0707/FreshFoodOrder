@@ -1,86 +1,123 @@
-<input type="hidden" value="{{login}}" id="islogin">
-<section class="owl-carousel active-product-area section_gap">
-	<div class="single-product-slider">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-6 text-center">
-					<div class="section-title">
-						<h1>Sản phẩm nổi bật </h1>
-					</div>
+<div class="pages__mainuser">
+	<div class="d-flex align-items-center">
+		<div class="row col-8">
+			<div class="text-center">
+				<div class="section-title">
+					<h1 class="bases__text-bold">Danh sách sản phẩm </h1>
 				</div>
 			</div>
-			<div class="row pages__mainuser">
-				{{#each products}}
-				<div class="col-lg-3 col-md-6">
-					<div class="single-product">
-						<img class="img" src="/upload/{{this.Image}}" alt="">
-						<div class="product-details">
-							<a href="/detail/{{this._id}}">
-								<div class="bases__text-bold bases__font--18">{{this.Name}}</div>
-							</a>
-							<div class="pro_bottom d-flex align-items-center">
-								<div class="bases__text-bold text-danger">
-									<div>${{this.Price}}</div>
-								</div>
-								<div class="">
-									<a href="/cart/{{this._id}}" class="islogin">
-										<button class="bases__btn btn-table ">
-											<img class="bases__icon-sm" src="/img/cart.png" />
-										</button>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				{{/each}}
-				<div class="">
-					<nav aria-label="Page navigation example">
-						Number of pages: {{pages}}
-						Current page: {{current}}
-						<ul class="pagination">
-							{{#if current}}
-							<li class="page-item">
-								<a class="page-link" href="/?page={{previousPage}}" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-									<span class="sr-only">Previous</span>
-								</a>
-							</li>
-							{{/if}}
-							{{#if hasPreviousPage }}
-							<li class="page-item"><a class="page-link"
-									href="/?page={{previousPage}}">{{previousPage}}</a></li>
-							{{/if}}
+		</div>
+		<div class="row col-4">
+			<div class="">
+				<form class="" method="GET">
+					<select name="orderby" class="select-order" onchange="this.form.submit()">
+						<option value="" selected disabled hidden> {{sort_value}} </option>
+						<option value="1">Giá từ thấp tới cao</option>
+						<option value="-1">Giá từ cao tới thấp</option>
 
-							<li class="page-item active"><a class="page-link" href="javascript:void(0)"
-									tabindex="-1">{{current}}</a></li>
-
-							{{#if hasNextPage}}
-							<li class="page-item"><a class="page-link" href="/?page={{nextPage}}">{{nextPage}}</a>
-							</li>
-							{{/if}}
-
-							{{#if pages  }}
-							<li class="page-item">
-								<a class="page-link" href="/?page={{nextPage}}" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-									<span class="sr-only">Next</span>
-								</a>
-							</li>
-							{{/if}}
-
-						</ul>
-					</nav>
-				</div>
+					</select>
+				</form>
+			</div>
+			<div class="">
+				<form method="POST">
+					<select name="numItems" onchange="this.form.submit()" class="select-number">
+						<option value="" selected disabled hidden> {{perPage}} </option>
+						<option value="12">8</option>
+						<option value="12">12</option>
+						<option value="16">16</option>
+						<option value="32">32</option>
+						<option value="1000">Tất cả</option>
+					</select>
+				</form>
 
 			</div>
 		</div>
 	</div>
-</section>
+	<section class="owl-carousel active-product-area section_gap">
+		<div class="single-product-slider">
+			<div class="container">
+				<div class="row  justify-content-center">
+					<div class="col-sm-6 ">
+						<div id="success" class="alert alert-success {{#if noMessages}}hidden{{/if}}">
+							{{successMsg}}
+						</div>
+					</div>
+				</div>
+				<div class="row ">
+					{{#each products}}
+					<div class="products">
+						<div class="main-product">
+							<img class="img" src="/upload/{{this.Image}}" alt="">
+							<div class="content-product">
+								<a href="/detail/{{this._id}}">
+									<div class="title">{{this.Name}}</div>
+								</a>
+								<div class="bottom d-flex ">
+									<div class="bottom-price">
+										<span class="money bases__font--20">{{this.price}}đ</span>
+									</div>
+									<div>
+										<a href="/addToCart/{{this._id}}">
+											<button type="button" class="bottom-cart">
+												<i class="bases__font--12 fas fa-shopping-cart ml-1"></i>
+												<span class="bases__font--16">Thêm vào giỏ</span>
+											</button>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{/each}}
+				</div>
+				<div class="row justify-content-center">
+					<div class="pages__mainuser-paginate">
+						<nav aria-label="Page navigation example ">
+							<ul class="pagination justify-content-center">
+								{{#if current}}
+								<li class="page-item">
+									<a class="page-link" href="/?page={{previousPage}}" aria-label="Previous">
+										<span aria-hidden="true">&laquo;</span>
+										<span class="sr-only">Previous</span>
+									</a>
+								</li>
+								{{/if}}
+								{{#if hasPreviousPage }}
+								<li class="page-item"><a class="page-link"
+										href="/?page={{previousPage}}">{{previousPage}}</a>
+								</li>
+								{{/if}}
+								<li class="page-item active"><a class="page-link" href="javascript:void(0)"
+										tabindex="-1">{{current}}</a>
+								</li>
+								{{#if hasNextPage}}
+								<li class="page-item"><a class="page-link" href="/?page={{nextPage}}">{{nextPage}}</a>
+								</li>
+								{{/if}}
+								{{#if pages  }}
+								<li class="page-item">
+									<a class="page-link" href="/?page={{nextPage}}" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+										<span class="sr-only">Next</span>
+									</a>
+								</li>
+								{{/if}}
+							</ul>
+						</nav>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
 <script src="js/jquery.js"></script>
 <script>
-	var islogin = $('#islogin').val();
-	if (islogin === 'false') {
-		$('.islogin').attr('href', '../user/login');
-	}
+	Handlebars.registerHelper('selected', function (option, value) {
+		if (option === value) {
+			return ' selected';
+		} else {
+			return ''
+		}
+	});
 </script>

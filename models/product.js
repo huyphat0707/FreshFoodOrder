@@ -2,15 +2,14 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Product = new Schema({
-	Image: String,
-	CateId: String,
-	Name: String,
-    Price: Number,
-    typeBuy: String,
-	Description: String,
-	Storage: String,
-	Origin: String,
-	Usage: String,
+  Image: {type: String},
+  CateId: {type: Number, ref: 'cate'},
+  Name: {type: String},
+  price: {type: Number},
+  typeBuy: {type: String},
+  Description: {type: String},
+  Storage: {type: String},
+  Origin: {type: String},
+  Usage: {type: String},
 });
-
 module.exports = mongoose.model('product', Product);

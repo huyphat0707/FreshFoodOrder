@@ -114,7 +114,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="../bill/list">Danh Sách</a>
+                                <a class="" href="../order/list">Danh Sách</a>
                             </li>
                         </ul>
                     </li>
@@ -158,9 +158,9 @@
                         </header>
                         <div class="content-body">
                             <div class="row">
-                                {{#if succsess_msg }}
+                                {{#if success_msg }}
                                 <div class="alert alert-info">
-                                    <p>{{succsess_msg}}</p>
+                                    <p>{{success_msg}}</p>
                                 </div>
                                 {{/if}}
                                 {{#if hasErrors}}
@@ -178,7 +178,7 @@
                                             <div class="controls">
                                                 <select class="form-control" name="category">
                                                     {{#each cate}}
-                                                    <option value="{{name}}">{{name}}</option>
+                                                    <option value="{{this._id}}">{{name}}</option>
                                                     {{/each}}
                                                 </select>
                                             </div>
@@ -230,7 +230,7 @@
                                             <span class="desc"></span>
                                             <div class="controls">
                                                 <textarea name="description" id="description" class="form-control autogrow"
-                                                    cols="5" rows="6"></textarea>
+                                                    cols="5" rows="6" maxlength="255"></textarea>
                                             </div>
                                         </div>
                                     </div>

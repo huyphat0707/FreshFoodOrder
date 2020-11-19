@@ -1,51 +1,4 @@
-{{!-- <section class="base__box">
-	<div class="body">
-		<div class="heading">
-			<div class="col-first">
-				<h1>Đăng Nhập</h1>
-			</div>
-		</div>
-		<div class="row align-items-center">
-			<div class="col-6">
-				<div class="login_box_img">
-					<img class="img-fluid" src="/img/logoo.png" width="100" height="100" alt="">
-					<div class="hover">
-						<h4>Bạn chưa có tài khoản?</h4>
-						<p>Vui lòng ấn vào nút đăng ký !! </p>
-						<a class="primary-btn" href="/user/registration">Đăng ký</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-6">
-				<div class="login_form_inner">
-					{{#if hasErrors}}
-					<div class="alert alert-danger">
-						{{# each messages}}
-						<p>{{this}}</p>
-						{{/each}}
-					</div>
-					{{/if}}
-					<form class="row login_form" action="login" method="POST" novalidate="novalidate">
-						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="email" name="email" placeholder="Email"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = 'email'">
-						</div>
-						<div class="col-md-12 form-group">
-							<input type="password" class="form-control" id="password" name="password"
-								placeholder="Password" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Password'">
-						</div>
-						<div class="col-md-12 form-group">
-							<input type="hidden" , name="_csrf" value="{{csrfToken}}">
-							<button type="submit" class="primary-btn">Đăng nhập</button>
-						</div>
-					</form>
-				</div>
-			</div>	
-		</div>
-	</div>
-</section> --}}
-<form action="login" method="POST" novalidate="novalidate">
+<form action="login" method="POST">
 	<div class="bases__box">
 		<div class="heading">
 			<div class="d-flex align-items-center">
@@ -59,7 +12,7 @@
 			<!-- radio -->
 			{{#if hasErrors}}
 			<div class="alert alert-danger">
-				{{# each messages}}
+				{{#each messages}}
 				<p>{{this}}</p>
 				{{/each}}
 			</div>
@@ -69,7 +22,7 @@
 					Email:
 				</div>
 				<div class="bases__col-right pr-0 d-flex">
-					<input class="w-100" type="email" id="email" maxlength="255" name="email" required />
+					<input class="w-100" type="text" id="email" maxlength="255" name="email" />
 				</div>
 			</div>
 			<div class="row align-items-center">
@@ -77,7 +30,7 @@
 					Password:
 				</div>
 				<div class="bases__col-right pr-0 d-flex">
-					<input class="w-100" type="password" maxlength="255" name="Password" required />
+					<input class="w-100" type="password" maxlength="255" name="password" />
 				</div>
 			</div>
 		</div>
