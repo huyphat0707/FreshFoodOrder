@@ -1,11 +1,11 @@
 .bases {
-    &__font {
-      &--10 {
-          font-size: 10px !important;
-          @include responsive(max-sm) {
-          font-size: 8px !important;
-          }
+  &__font {
+    &--10 {
+      font-size: 10px !important;
+      @include responsive(max-sm) {
+        font-size: 8px !important;
       }
+    }
     &--12 {
       font-size: 12px !important;
       @include responsive(max-sm) {
@@ -161,6 +161,19 @@
       }
     }
     &.btn {
+      &-dropdown {
+        background-color: $color-green;
+        color: $color-white;
+        padding: 16px;
+        font-size: 16px;
+        height: 50px;
+        width: 230px;
+        border: 5px;
+        cursor: pointer;
+        &:hover {
+          background-color:$color-green-dark;
+        }
+      }
       &-submit {
         background-color: $color-blue;
         color: $color-white;
@@ -177,51 +190,79 @@
           outline: 5px auto -webkit-focus-ring-color;
         }
       }
-    &-form,
-    &-table {
-      height: 30px;
-      color: $color-black;
-      background-color: $color-orange;
-      padding: 0 16px !important;
-      font-weight: 300;
-      border: 1px solid;
-      border-color: $color-blue;
-      margin-left: 100px;
+      &-delete {
+        font-weight: 300;
+        border-radius: 32px;
+        padding: 10px 20px;
+        border-color: $color-blue;
+        color: $color-blue;
+      }
+      &-round {
+        font-weight: 300;
+        border-radius: 32px;
+        padding: 10px 20px;
+        &-cart {
+          background-color: $color-orange;
+          color: $color-white;
+          border-color: $color-blue;
+          border-radius: 5px;
+          margin-right: 20px;
+          margin-bottom: 40px;
+        }
+        &-buy {
+          background-color: $color-blue;
+          color: $color-white;
+          border-color: $color-blue;
+          border-radius: 5px;
+          margin-right: 20px;
+          margin-bottom: 40px;
+        }
+      }
+      &-form,
+      &-table {
+        height: 30px;
+        color: $color-black;
+        background-color: $color-orange;
+        padding: 0 16px !important;
+        font-weight: 300;
+        border: 1px solid;
+        border-color: $color-blue;
+        margin-left: 100px;
+      }
+      &-lg {
+        font-weight: 300;
+        padding: 10px 22px;
+      }
     }
-    &-lg {
-      font-weight: 300;
-      padding: 10px 22px;
+  }
+  &__table {
+    width: 100%;
+    overflow-x: scroll;
+    &:first-child {
+      margin-top: 54px;
+    }
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .data {
+      display: grid;
+      border-bottom: 1px solid $color-dark-gray;
+      div {
+        padding: 11px 0px;
+      }
     }
   }
-}
-&__table {
-  width: 100%;
-  overflow-x: scroll;
-  &:first-child {
-    margin-top: 54px;
-  }
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  .data {
-    display: grid;
-    border-bottom: 1px solid $color-dark-gray;
-    div {
-      padding: 11px 0px;
+  &__col {
+    &-left {
+      width: 22%;
+      margin-right: 10px;
+    }
+    &-right {
+      flex-basis: 0;
+      flex-grow: 1;
+      max-width: 100%;
     }
   }
-}
-&__col {
-  &-left {
-    width: 22%;
-    margin-right: 10px;
-  }
-  &-right {
-    flex-basis: 0;
-    flex-grow: 1;
-    max-width: 100%;
-  }
-}
 }
 body,
 html {
@@ -231,10 +272,10 @@ html {
 }
 
 a {
-  // text-decoration: none !important;
+  text-decoration: none !important;
   color: $color-black;
   &:hover {
-    color: $color-shadow;
+    color: $color-blue;
   }
 }
 
@@ -251,8 +292,8 @@ button {
   }
 }
 
-input[type="radio"],
-input[type="checkbox"],
+input[type='radio'],
+input[type='checkbox'],
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -292,8 +333,8 @@ select {
 }
 
 input {
-  &[type="checkbox"],
-  &[type="radio"] {
+  &[type='checkbox'],
+  &[type='radio'] {
     width: 28px;
     height: 28px;
     margin-right: 10px;
@@ -307,24 +348,24 @@ input {
       border: 1px solid $color-shadow;
     }
   }
-  &[type="radio"] {
+  &[type='radio'] {
     border-radius: calc(28px / 2) !important;
     &:checked {
-      background-image: url("/dashboard/img/icon/dot.png");
+      background-image: url('/img/icons/dot.png');
       background-position: center;
       background-size: 12px;
       background-repeat: no-repeat;
     }
   }
-  &[type="checkbox"] {
+  &[type='checkbox'] {
     &:checked {
-      background-image: url("/dashboard/img/icon/check.png");
+      background-image: url('/img/icons/check.png');
       background-position: center;
       background-size: 20px;
       background-repeat: no-repeat;
     }
   }
-  &[type="file"] {
+  &[type='file'] {
     display: none;
   }
 }
@@ -365,6 +406,9 @@ textarea {
   }
 }
 
+.hidden {
+  display: none;
+}
 .invalid-feedback {
   display: block;
   &-option {
@@ -379,16 +423,6 @@ textarea {
   }
 }
 
-.d-none {
-  display: none !important;
-}
-
-.tag_currency {
-  position: absolute;
-  right: -20px;
-  top: 8px;
-}
-
 label {
   margin-bottom: unset !important;
 }
@@ -397,17 +431,6 @@ label {
   margin-left: unset !important;
   margin-right: unset !important;
 }
-
-.bootstrap-timepicker-widget table td input {
-  width: 55px !important;
-  padding: unset;
-}
-
-.datepicker,
-.table-condensed {
-  font-size: x-small;
-}
-
 .badge {
   background-color: $color-pink;
   color: $color-white;
@@ -419,6 +442,6 @@ label {
   color: $color-pink !important;
 }
 
-section{
+section {
   margin-bottom: 50px;
 }

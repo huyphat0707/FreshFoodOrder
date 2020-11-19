@@ -1,0 +1,38 @@
+.pages{
+    &__category{
+        .dropdown {
+            background-color: $color-blue;
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: $color-white;
+            min-width: 230px;
+            overflow: auto;
+            border: 1px solid;
+            border-color: $color-gray;
+            z-index: 1;
+            a {
+                color: $color-blue;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                &:hover{
+                    background-color: $color-gray;
+                }
+            }
+        }
+        .show {display: block;}
+        #myInput {
+            box-sizing: border-box;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 14px 20px 12px 45px;
+            border: none;
+            width: 225px;
+            border-bottom: 1px solid $color-gray;
+        }
+    }
+}

@@ -2,8 +2,8 @@
 //
 - npm install global
 //
-- npm i để cài đặt package
+- npm i 
 //
-- npm run dev để chạy lệnh
+- npm run dev 
 //
 http://localhost:3000/admin

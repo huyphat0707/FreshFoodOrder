@@ -17,16 +17,15 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
     </link>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
     <link rel="stylesheet" href="/dist/css/main.css">
     </link>
 </head>
-{{>header}}
- 
+
 <body>
-   {{>banner}}
-    <div class="layouts__main">
-        {{{body}}}
-    </div>
+    {{>header}}
+    {{>banner}}
+    {{{body}}}
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
@@ -39,6 +38,7 @@
 
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
     {{> footer}}
     <script>
         // Overwrite smooth scroll behaviour

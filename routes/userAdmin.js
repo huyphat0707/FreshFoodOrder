@@ -24,7 +24,7 @@ router.post('/:id/edit', isLoggedIn, function (req, res, next) {
     User.findById(req.params.id, function (err, data) {
         data.roles = req.body.roles;
         data.save();
-        req.flash('succsess_msg', 'Đã Sửa Thành Công');
+        req.flash('success_msg', 'Đã Sửa Thành Công');
         res.redirect('/admin/user/' + req.params.id + '/Edit');
     });
 });
@@ -32,7 +32,7 @@ router.post('/:id/edit', isLoggedIn, function (req, res, next) {
 router.get('/:id/delete', isLoggedIn, function (req, res, next) {
     var id = req.params.id;
     User.findOneAndRemove({ _id: id }, function (err, offer) {
-        req.flash('succsess_msg', 'Đã Xoá Thành Công');
+        req.flash('success_msg', 'Đã Xoá Thành Công');
         res.redirect('/admin/user/List');
     });
 });
