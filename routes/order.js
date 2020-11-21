@@ -10,19 +10,20 @@ router.get('/', isLoggedIn, function (req, res, next) {
 
 router.get('/list', isLoggedIn, function (req, res, next) {
   Order.find().then(function (data) {
-    res.render('admin/order/list', {data: data, layout: false});
+    res.render('admin/order/list', {data: data, layout: false, user: req.user});
   });
 });
 
 router.get('/:id/view', isLoggedIn, function (req, res, next) {
   var id = req.params.id;
-  var cart = new Cart(req.session.cart);
   Order.findById(id).then(function (data) {
+    var cart = data.cart;
     res.render('admin/order/view', {
       pro: data,
       layout: false,
       totalPrice: cart.totalPrice,
-      cart: cart.convertArray(),
+      cart: cart.items,
+      user: req.user,
     });
   });
 });

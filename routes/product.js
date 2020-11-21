@@ -4,13 +4,18 @@ var Product = require('../models/product.js');
 var Cate = require('../models/cate.js');
 const uploadImage = require('../config/multer.js');
 
-router.get('/', isLoggedIn, function (req, res) {
-  res.redirect('/admin/product/List', {layout: false});
-});
+// router.get('/', isLoggedIn, function (req, res) {
+//   res.redirect('/admin/product/List', {layout: false});
+// });
 
 router.get('/add', isLoggedIn, (req, res) => {
   Cate.find().then(function (cate) {
-    res.render('admin/product/Add', {errors: null, cate: cate, layout: false});
+    res.render('admin/product/Add', {
+      errors: null,
+      cate: cate,
+      layout: false,
+      user: req.user,
+    });
   });
 });
 router.post('/add', isLoggedIn, uploadImage.single('image'), function (
@@ -47,6 +52,7 @@ router.post('/add', isLoggedIn, uploadImage.single('image'), function (
 });
 
 router.get('/list', isLoggedIn, function (req, res) {
+  var success_msg = req.flash('success_msg')[0];
   var perPage = 8;
   var page = parseInt(req.query.page) || 1;
   Product.find({})
@@ -64,10 +70,38 @@ router.get('/list', isLoggedIn, function (req, res) {
           nextPage: page + 1,
           previousPage: page - 1,
           pages: Math.ceil(count / perPage),
+          user: req.user,
+          success_msg: success_msg,
         });
       });
     });
 });
+
+router.post('/list', isLoggedIn, function (req, res) {
+  var find = req.body.findProduct;
+  var perPage = 8;
+  var page = parseInt(req.query.page) || 1;
+  Product.find({Name: {$regex: find}})
+    .skip((page - 1) * perPage)
+    .limit(perPage)
+    .exec(function (err, products) {
+      Product.count().exec(function (err, count) {
+        if (err) return next(err);
+        res.render('admin/product/List', {
+          layout: false,
+          product: products,
+          current: page,
+          hasNextPage: perPage * page < count,
+          hasPreviousPage: page > 1,
+          nextPage: page + 1,
+          previousPage: page - 1,
+          pages: Math.ceil(count / perPage),
+          user: req.user,
+        });
+      });
+    });
+});
+
 router.get('/:id/edit', isLoggedIn, function (req, res) {
   Product.findById(req.params.id, function (err, data) {
     Cate.find().then(function (cate) {
@@ -76,6 +110,7 @@ router.get('/:id/edit', isLoggedIn, function (req, res) {
         product: data,
         cate: cate,
         layout: false,
+        user: req.user,
       });
     });
   });
@@ -109,6 +144,7 @@ router.post(
         Usage: usage,
       });
       pro.save();
+      req.flash('success_msg', 'Đã Cập Nhật Thành Công');
       res.redirect('/admin/product/List');
     } catch (error) {
       console.log(error);

@@ -215,6 +215,10 @@ section.box.marginBottom0,
     color: rgba(118, 118, 118, 1.0);
     margin-bottom: 15px;
 }
+.page-title input{
+    margin-right: 30px;
+    padding: 20px;
+}
 .page-title .breadcrumb {
     padding: 0px;
     margin: 15px 0;
@@ -223,6 +227,9 @@ section.box.marginBottom0,
     display: inline-block;
     width: 100%;
     margin-top: 10px;
+}
+.page-title .pull-right{
+    margin-right: 20px;
 }
 /*---------------------------------
     Typography

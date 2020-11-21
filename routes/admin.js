@@ -9,7 +9,10 @@ var User = require('../models/user');
 require('dotenv').config();
 
 router.get('/', isLoggedIn, function (req, res) {
-  res.render('admin/main/index', {layout: false, user: req.user});
+  res.render('admin/main/index', {
+    layout: false,
+    user: req.user,
+  });
 });
 router.get('/logout', isLoggedIn, function (req, res, next) {
   req.logout();
@@ -18,8 +21,11 @@ router.get('/logout', isLoggedIn, function (req, res, next) {
 
 router.get('/login', notisLoggedIn, function (req, res, next) {
   var messages = req.flash('error');
+  var successMsg = req.flash('success')[0];
   res.render('admin/login/login_ad', {
     messages: messages,
+    noSuccess: !successMsg,
+    success: successMsg,
     hasErrors: messages.length > 0,
     layout: false,
   });
@@ -53,7 +59,7 @@ router.post('/changePass', function (req, res, next) {
     } else {
       req.user.password = bcrypt.hashSync(req.body.newPass);
       req.user.save();
-      req.flash('error', 'Đổi mật khẩu thành công!');
+      req.flash('success', 'Đổi mật khẩu thành công!');
       res.render('admin/login/login_ad', {layout: false});
     }
   });

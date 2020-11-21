@@ -26,6 +26,11 @@
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<style>
+		.hidden{
+			display: none;
+		}
+	</style>
 	<!--===============================================================================================-->
 </head>
 
@@ -41,6 +46,9 @@
 					<span class="login100-form-title p-b-34 p-t-27">
 						Sign In
 					</span>
+					<div class="alert alert-dark {{#if noSuccess}} hidden {{/if}}">
+						<p>{{success}}</p>
+					</div>
 					{{#if hasErrors}}
 					<div class="alert alert-danger">
 						{{# each messages}}
@@ -84,7 +92,6 @@
 
 
 	<div id="dropDownSelect1"></div>
-
 	<!--===============================================================================================-->
 	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
