@@ -70,7 +70,7 @@ app.use(session({
   resave: true, 
   saveUninitialized: true, 
   secret: 'secret', 
-  cookie: { maxAge: 60000 }}));
+  cookie: { maxAge: 60000000 }}));
 
 app.use(function(req, res, next){
   res.locals.login = req.isAuthenticated();

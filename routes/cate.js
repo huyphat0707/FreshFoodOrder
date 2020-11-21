@@ -7,7 +7,7 @@ const Product = require('../models/product');
 
 router.get('/add',isLoggedIn, (req, res, next) => {
 	res.render('admin/cate/Add', { layout: false })
-})
+});
 router.post('/add',isLoggedIn, uploadImage.single('imgCate'), (req, res, next) => {
 	const file = req.file
 	if (!file) {
@@ -16,7 +16,7 @@ router.post('/add',isLoggedIn, uploadImage.single('imgCate'), (req, res, next) =
 		return next(error)
 	} else {
 		var cate = new Cate({
-			id: req.body.id,
+			cateID: req.body.cateID,
 			imgCate: req.file.filename,
 			name: req.body.nameCate,
 		});
@@ -38,9 +38,9 @@ router.get('/list',isLoggedIn, (req, res, next) => {
 			res.json({ "kq": 0, 'error': err });
 		}
 	});
-})
-router.get('/:id/delete',isLoggedIn, (req, res, next) => {
-	Cate.findById(req.params.id).deleteOne(function (err) {
+});
+router.get('/:cateID/delete',isLoggedIn, (req, res, next) => {
+	Cate.find({cateID: req.params.cateID}).deleteOne(function (err) {
 		if (err) {
 			res.json({ "kq": 0, 'error': err });
 		} else {
@@ -51,7 +51,7 @@ router.get('/:id/delete',isLoggedIn, (req, res, next) => {
 			res.redirect('/admin/cate/List');
 		}
 	})
-})
+});
 router.get('/:id/edit',isLoggedIn, function (req, res, next) {
 	Cate.findById(req.params.id, function (err, data) {
 		res.render('admin/cate/Edit', { errors: null, data: data, layout: false });
@@ -60,9 +60,10 @@ router.get('/:id/edit',isLoggedIn, function (req, res, next) {
 
 router.post('/:id/edit',isLoggedIn, uploadImage.single('imgCate'), async (req, res, next) => {
 	const { id } = req.params;
-	const { name } = req.body;
+	const { cateID, name } = req.body;
 	try {
 		const cate = await Cate.findByIdAndUpdate(id, {
+			cateID: cateID,
 			name: name,
 			imgCate: req.file.filename,
 		});
