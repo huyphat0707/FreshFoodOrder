@@ -37,7 +37,7 @@
                             <span class="name"> <i class="fa fa-angle-down"></i></span>
                         </a>
                         <ul class="dropdown-menu profile animated fadeIn">
-                            {{!-- {{#if login_ad}} --}}
+                            {{#if user}}
                             <li class="last">
                                 <a href="/admin/logout">
                                     <i class="fa fa-lock"></i>
@@ -50,7 +50,7 @@
                                     Đổi mật khẩu
                                 </a>
                             </li>
-                            {{!-- {{/if}} --}}
+                            {{/if}}
                         </ul>
                     </li>
                 </ul>
@@ -124,7 +124,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="admin/order/list">Danh Sách</a>
+                                <a class="" href="/admin/order/list">Danh Sách</a>
                             </li>
                         </ul>
                     </li>
@@ -210,19 +210,16 @@
                                                 {{/each}}
                                             </tbody>
                                         </table>
-                                        <tr>
+                                        <tr style="text-align: right;"> 
                                             <td colspan="5">
-                                                {{#if pro.st}}
                                                 <span>Đã Thanh Toán</span>
-                                                {{else}}
-                                                <a href="/admin/order/{{pro._id}}/pay">Thanh Toán</a>
-                                                {{/if}} |
+                                                |
                                                 <a href="/admin/order/{{pro._id}}/delete">Xoá</a>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="5">
-                                                <p>
+                                            <td >
+                                                <p style="text-align: right; margin-right: 60px; padding-right: 40px;">
                                                     <strong class="text-danger">
                                                         Tồng Tiền:
                                                     </strong>

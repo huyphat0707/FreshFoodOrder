@@ -32,10 +32,10 @@
                     <div class="data bases__font--16 align-items-center ">
                         <div><img class="img" src="/upload/{{this.item.Image}}" alt=""></div>
                         <div>{{this.item.Name}}</div>
-                        <div>${{this.item.price}}</div>
+                        <div>{{this.item.price}}đ</div>
                         <div><input id="{{this.item._id}}" name="qty" type="number" min="1" class="qty"
                                 value="{{this.qty}}"></div>
-                        <div>${{this.price}}</div>
+                        <div>{{this.price}}đ</div>
                         <div><button class="bases__btn btn-round dropdown-toggle" data-toggle="dropdown"
                                 type="button">Xóa<span class="caret"></span></button>
                             <ul class="dropdown-menu">
@@ -77,7 +77,7 @@
     </div>
 </div>
 {{else}}
-<h1 style="text-align: center; ">No item in cart</h1>
+<h1 style="text-align: center; ">Không có sản phẩm nào trong giỏ hàng</h1>
 {{/if}}
 <script language="javascript">
     function checkAll(e) {

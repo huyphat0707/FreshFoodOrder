@@ -25,6 +25,7 @@ router.get('/registration', function (req, res, next) {
     csrfToken: req.csrfToken(),
     messages: messages,
     hasErrors: messages.length > 0,
+    user: req.user,
   });
 });
 
@@ -50,18 +51,18 @@ router.post(
 //   failureFlash: true
 // }));
 
-router.get('/userProfile', function (req, res, next) {
-  Order.find({user: req.user}, function (err, orders) {
-    if (err) {
-      return res.write('Error!');
-    }
-    var cart;
-    orders.forEach(function (order) {
-      cart = new Cart(order.cart);
-      order.items = cart.convertArray();
-    });
-    res.render('user/profile', {orders: orders});
-  });
+router.get('/userProfile', isLoggedIn, function (req, res, next) {
+  // Order.find({user: req.user}, function (err, orders) {
+  //   if (err) {
+  //     return res.write('Error!');
+  //   }
+  //   var cart;
+  //   orders.forEach(function (order) {
+  //     cart = new Cart(order.cart);
+  //     order.items = cart.convertArray();
+  //   });
+  res.render('user/profile', {user: req.user});
+  // });
 });
 
 router.get('/login', function (req, res, next) {
@@ -70,6 +71,7 @@ router.get('/login', function (req, res, next) {
     csrfToken: req.csrfToken(),
     messages: messages,
     hasErrors: messages.length > 0,
+    user: req.user,
   });
 });
 router.post(

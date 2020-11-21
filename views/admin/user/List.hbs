@@ -5,13 +5,6 @@
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
     <title>ADMIN</title>
-    <link rel="apple-touch-icon-precomposed" href="/admin_js/assets/images/apple-touch-icon-57-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114"
-        href="/admin_js/assets/images/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72"
-        href="/admin_js/assets/images/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144"
-        href="/admin_js/assets/images/apple-touch-icon-144-precomposed.png">
     <link href="/admin_js/assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="/admin_js/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="/admin_js/assets/plugins/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
@@ -46,11 +39,17 @@
                             <span class="name"> <i class="fa fa-angle-down"></i></span>
                         </a>
                         <ul class="dropdown-menu profile animated fadeIn">
-                            {{# if login}}
+                            {{#if user}}
                             <li class="last">
-                                <a href="../logout">
+                                <a href="/admin/logout">
                                     <i class="fa fa-lock"></i>
                                     Đăng xuất
+                                </a>
+                            </li>
+                            <li class="last">
+                                <a href="/admin/changePass">
+                                    <i class="fa fa-lock"></i>
+                                    Đổi mật khẩu
                                 </a>
                             </li>
                             {{/if}}
@@ -60,16 +59,9 @@
             </div>
         </div>
     </div>
-    <!-- END Header -->
-
-    <!-- START CONTAINER -->
     <div class="page-container row-fluid container-fluid">
-
-        <!-- Menu START -->
         <div class="page-sidebar pagescroll">
-            <!-- MAIN MENU - START -->
             <div class="page-sidebar-wrapper" id="main-menu-wrapper">
-                <!-- USER INFO - START -->
                 <div class="profile-info row">
                     <div class="profile-image col-xs-4">
                         <img alt="" src="/img/avatar.png" class="img-responsive img-circle avatar">
@@ -78,7 +70,6 @@
                     <div class="profile-details col-xs-8">
                         <h3>
                             <a class="name">{{user.email}}</a>
-                            <!-- Available statuses: online, idle, busy, away and offline -->
                             <span class="profile-status online"></span>
                         </h3>
                         <p class="profile-title">Web dành cho nhà phát triển</p>
@@ -207,7 +198,6 @@
                                                 {{/each}}
                                             </tbody>
                                         </table>
-                                        <!-- ********************************************** -->
                                     </div>
                                 </div>
                             </div>

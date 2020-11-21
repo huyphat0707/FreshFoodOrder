@@ -3,6 +3,7 @@ const expressHbs = require('express-handlebars');
 const app = express();
 const port = process.env.PORT || 3000;
 const Handlebars = require('handlebars');
+const hbs = require('hbs');
 const cors = require('cors');
 var passport = require('passport');
 var flash = require('connect-flash');
@@ -59,11 +60,13 @@ app.engine(
   expressHbs({
     extname: 'hbs',
     defaultLayout: 'layout',
-    partialsDir: 'views/partials',
+    partialsDir: __dirname + '/views/partials/',
     handlebars: allowInsecurePrototypeAccess(Handlebars),
     section: express_handlebars_sections(),
   })
 );
+hbs.registerPartials(__dirname + '/views/partials');
+
 //body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var multer = require('multer');
 const uploadImage = require('../config/multer');
 var Cate = require('../models/cate.js');
-const Product = require('../models/product');
+const {route} = require('./order');
 router.get('/add', isLoggedIn, (req, res, next) => {
-  res.render('admin/cate/Add', {layout: false});
+  res.render('admin/cate/Add', {layout: false, user: req.user});
 });
 router.post(
   '/add',
@@ -27,29 +26,69 @@ router.post(
           res.json({kq: 0, errMeg: err});
         } else {
           req.flash('success_msg', 'Đã Thêm Thành Công');
-          res.redirect('/admin/cate/Add');
+          res.redirect('/admin/cate/List');
         }
       });
     }
   }
 );
 router.get('/list', isLoggedIn, (req, res, next) => {
-  Cate.find().then(function (cate, err) {
-    if (!err) {
-      res.render('admin/cate/List', {layout: false, data: cate});
-    } else {
-      res.json({kq: 0, error: err});
-    }
-  });
+  var success_msg = req.flash('success_msg')[0];
+  var perPage = 8;
+  var page = parseInt(req.query.page) || 1;
+  Cate.find({})
+    .skip((page - 1) * perPage)
+    .limit(perPage)
+    .exec(function (err, cate) {
+      Cate.count().exec(function (err, count) {
+        if (err) return next(err);
+        res.render('admin/cate/List', {
+          layout: false,
+          data: cate,
+          current: page,
+          hasNextPage: perPage * page < count,
+          hasPreviousPage: page > 1,
+          nextPage: page + 1,
+          previousPage: page - 1,
+          pages: Math.ceil(count / perPage),
+          user: req.user,
+          success_msg: success_msg,
+        });
+      });
+    });
 });
+
+router.post('/list', isLoggedIn, function (req, res) {
+  var find = req.body.findCategory;
+  var perPage = 8;
+  var page = parseInt(req.query.page) || 1;
+  Cate.find({name: {$regex: find}})
+    .skip((page - 1) * perPage)
+    .limit(perPage)
+    .exec(function (err, cate) {
+      Cate.count().exec(function (err, count) {
+        if (err) return next(err);
+        res.render('admin/cate/List', {
+          layout: false,
+          data: cate,
+          current: page,
+          hasNextPage: perPage * page < count,
+          hasPreviousPage: page > 1,
+          nextPage: page + 1,
+          previousPage: page - 1,
+          pages: Math.ceil(count / perPage),
+          user: req.user,
+        });
+      });
+    });
+});
+
+//delete
 router.get('/:id/delete', isLoggedIn, (req, res, next) => {
   Cate.findById(req.params.id).deleteOne(function (err) {
     if (err) {
       res.json({kq: 0, error: err});
     } else {
-      Product.find({name: req.body.oldCat}, (err, pro) => {
-        console.log(pro);
-      });
       req.flash('success_msg', 'Đã Xoá Thành Công');
       res.redirect('/admin/cate/List');
     }
@@ -57,7 +96,12 @@ router.get('/:id/delete', isLoggedIn, (req, res, next) => {
 });
 router.get('/:id/edit', isLoggedIn, function (req, res, next) {
   Cate.findById(req.params.id, function (err, data) {
-    res.render('admin/cate/Edit', {errors: null, data: data, layout: false});
+    res.render('admin/cate/Edit', {
+      errors: null,
+      data: data,
+      layout: false,
+      user: req.user,
+    });
   });
 });
 
@@ -74,6 +118,7 @@ router.post(
         imgCate: req.file.filename,
       });
       cate.save();
+      req.flash('success_msg', 'Đã Sửa Thành Công');
       res.redirect('/admin/cate/List');
     } catch (error) {
       console.log(error);

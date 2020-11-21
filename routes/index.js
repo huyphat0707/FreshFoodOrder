@@ -66,10 +66,23 @@ router.get('/product', function (req, res) {
   });
 });
 
+router.get('/cate/:name.:id', function (req, res) {
+  Product.find({CateId: req.params.id}, function (err, data) {
+    Cate.find().then(function (cate) {
+      res.render('shop/product', {product: data, cate: cate});
+    });
+  });
+});
 //trang chi tiết sp
 router.get('/detail/:id', function (req, res) {
+  var user = req.user;
   Product.findById(req.params.id).then(function (data) {
-    res.render('shop/detail', {products: data, session: req.session});
+    res.render('shop/detail', {
+      products: data,
+      session: req.session,
+      user: user,
+      noUser: !user,
+    });
   });
 });
 
