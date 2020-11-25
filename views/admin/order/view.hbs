@@ -13,6 +13,7 @@
     <link href="/admin_js/assets/css/style.css" rel="stylesheet" type="text/css" />
     <link href="/admin_js/assets/css/responsive.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="/dist/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
 </head>
 
 <body>
@@ -81,13 +82,13 @@
                     <li class='menusection'>Menu</li>
                     <li class="open">
                         <a href="/admin">
-                            <i class="fa fa-dashboard"></i>
+                            <i class="fas fa-tachometer-alt"></i>
                             <span class="title">Thống kê</span>
                         </a>
                     </li>
                     <li class="">
                         <a href="javascript:;">
-                            <i class="fa fa-suitcase"></i>
+                            <i class="fa fa-list-alt"></i>
                             <span class="title">Thể loại</span>
                             <span class="arrow "></span>
                         </a>
@@ -118,7 +119,7 @@
 
                     <li class="">
                         <a href="javascript:;">
-                            <i class="fa fa-suitcase"></i>
+                            <i class="fas fa-luggage-cart"></i>
                             <span class="title">Đơn Hàng</span>
                             <span class="arrow "></span>
                         </a>
@@ -130,7 +131,7 @@
                     </li>
                     <li class="">
                         <a href="javascript:;">
-                            <i class="fa fa-suitcase"></i>
+                            <i class="fa fa-users"></i>
                             <span class="title">Tài Khoản</span>
                             <span class="arrow "></span>
                         </a>
@@ -201,8 +202,8 @@
                                                 {{#each cart }}
                                                 <tr>
                                                     <td>1</td>
-                                                    <td>{{this.item.Name}}</td>
-                                                    <td><img src="/upload/{{this.item.Image}}" width="100px" alt="">
+                                                    <td>{{this.item.name}}</td>
+                                                    <td><img src="/upload/{{this.item.image}}" width="100px" alt="">
                                                     </td>
                                                     <td>{{this.qty}}</td>
                                                     <td>{{this.price}}đ</td>

@@ -22,7 +22,7 @@ router.get('/productDetail/:id', async (req, res) => {
 
 router.get('/productByCate', async (req, res) => {
     try {
-        let ProductByCateData = await Product.find({CateId: req.query.CateId});
+        let ProductByCateData = await Product.find({cateId: req.query.cateId});
         return res.status(200).json({dataProductByCate: ProductByCateData});
     } catch (error) {
         console.log(error);

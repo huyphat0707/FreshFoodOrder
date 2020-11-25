@@ -16,7 +16,7 @@ mongoose.connect('mongodb+srv://admin:0joIlgGzoKMMEagE@cluster0.adn4g.mongodb.ne
 var products = [
     new product({
         Image: 'https://image.thanhnien.vn/1080/uploaded/ngocthanh/2016_10_30/bi1_mrdv_xnzz.jpg',
-        CateId: 'rau ăn củ',
+        cateId: 'rau ăn củ',
         Name: 'Qủa bí đỏ',
         Price: 25000,
         typeBuy: '',

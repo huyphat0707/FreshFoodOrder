@@ -31,8 +31,9 @@ var order = require('./routes/order');
 //connect mongoose
 app.use(cors());
 const mongoose = require('mongoose');
+const urlConnect = process.env.DB;
 mongoose.connect(
-  'mongodb+srv://admin:0joIlgGzoKMMEagE@cluster0.adn4g.mongodb.net/FreshVegetablemanager?retryWrites=true&w=majority',
+  urlConnect,
   {
     useNewUrlParser: true,
     useFindAndModify: false,
@@ -46,6 +47,7 @@ mongoose.connect(
     }
   }
 );
+
 
 //serving static files
 app.use(express.static(__dirname + '/public'));
@@ -109,6 +111,11 @@ app.use(function (req, res, next) {
   res.locals.currentUser = req.user || null;
   res.locals.session = req.session;
   next();
+});
+
+//404
+app.use(function (req, res, next) {
+  next(createError(404));
 });
 
 app.listen(port, () => {
