@@ -207,7 +207,6 @@ router.get('/addToCart/:id', function (req, res, next) {
                 items: {}
             }
     );
-
     Product.findById(productId, function (err, product) {
         if (err) {
             return res.redirect('/');
@@ -224,11 +223,13 @@ router.get('/cart', function (req, res, next) {
     }
     var cart = new Cart(req.session.cart);
     var user = req.user;
+    var isAuthenticated = true;
     res.render('shop/cart', {
         products: cart.convertArray(),
         totalPrice: cart.totalPrice,
+        user: user,
         session: req.session,
-        user: user
+        isAuthenticated:isAuthenticated
     });
 });
 
@@ -282,7 +283,7 @@ router.post('/checkout', isLoggedIn, function (req, res, next) {
                 paymentId: charge.id
             });
             order.save(function (err, result) {
-                req.flash('success', 'Successful bought product!');
+                req.flash('success', 'Đã thanh toán thành công!');
                 req.session.cart = null;
                 user = req.user;
                 res.redirect('/user/profile');
@@ -327,7 +328,7 @@ router.get('/delete', function (req, res) {
             .save();
     }
     res.redirect('cart');
-})
+});
 
 //update sp
 router.post('/update/:id', function (req, res) {
@@ -338,7 +339,6 @@ router.post('/update/:id', function (req, res) {
             ? req.session.cart
             : {}
     );
-
     cart.updateCart(productId, qty);
     req.session.cart = cart;
     var data = cart.convertArray();
@@ -349,6 +349,28 @@ router.post('/update/:id', function (req, res) {
         user: req.user
     });
 });
+
+router.get('/update',function(req,res,next){
+    var prodId = req.query.id;
+    console.log(prodId);
+//     var qty = req.query.qty;
+//     if (qty == 0) {
+//       return res.redirect('back');
+//     }
+//     var cart = new Cart(req.session.cart ? req.session.cart : {});
+//     Product.findById(prodId, (err, product) => {
+//       if (err) {
+//         return res.redirect('back');
+//       }
+//       cart.changeQty(product, prodId, qty);
+//       req.session.cart = cart;
+//       if (req.user) {
+//         req.user.cart = cart;
+//         req.user.save();
+//       }
+//       res.redirect('back');
+//     });
+})
 
 router.get('/verify-email', function (req, res, next) {
     var transporter = nodemailer.createTransport({
@@ -399,10 +421,49 @@ router.post('/verify-email', function (req, res, next) {
             return res.redirect('/');
         } else if (token != user.verify_token) {
             req.flash('error', 'Mã xác thực không hợp lệ ');
-            return res.redirect('/user/verify-email');
+            return res.redirect('/verify-email');
         }
     });
 });
+
+router.get('/contact-us', function (req, res, next) {
+    var messages = req.flash('success')[0];
+    res.render('shop/contact-us', {
+        session: req.session,
+        user: req.user,
+        messages: messages,
+        noMessages: !messages
+    });
+});
+
+router.post('/contact-us', function (req, res, next) {
+    var body = req.body;
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
+        }
+    });
+    var mainOptions = {
+        from: body.email,
+        to: process.env.EMAIL,
+        subject: body.name,
+        text: body.title,
+        html: '<p>You have got a new message</b><ul><li>Username:' + body.name + '</li><li>Em' +
+                'ail:' + body.email + '</li><li>Message:' + body.content + '</li></ul>'
+    };
+    transporter.sendMail(mainOptions, (err, info) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('Sent:' + info.response);
+        }
+    });
+    req.flash('success', 'Đã gửi thành công')
+    res.redirect('/contact-us');
+});
+
 module.exports = router;
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {

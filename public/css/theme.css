@@ -22,15 +22,13 @@
   display: inline-block;
   color: #ffb503;
 }
-.tt-rating .icon-star-half:before {
-  content: '\ea60';
+.tt-rating .fa.fa-star-half-o:before {
   display: inline-block;
   color: #ffb503;
 }
 .tt-rating .icon-star-empty:before {
-  content: '\ea5f';
   display: inline-block;
-  color: #d4d4d4;
+  color: #191919;
 }
 
 .tt-review-block .tt-row-custom-02 {

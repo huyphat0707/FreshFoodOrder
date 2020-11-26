@@ -2,6 +2,7 @@ function Cart(oldCart) {
   this.items = oldCart.items || {};
   this.totalQty = oldCart.totalQty || 0;
   this.totalPrice = oldCart.totalPrice || 0;
+  this.numItems = oldCart.numItems || 0;
 
   this.add = function (item, id) {
     var order = this.items[id];
@@ -23,7 +24,6 @@ function Cart(oldCart) {
       delete this.items[id];
     }
   };
-
   //xóa nhiều sp
   this.remove = function (id) {
     this.totalQty -= this.items[id].qty;
@@ -44,6 +44,20 @@ function Cart(oldCart) {
     order.price = order.qty * order.item.price;
     this.totalQty += qtyAfter - oldQty;
     this.totalPrice += (qtyAfter - qtyAdvance) * order.item.price;
+  };
+
+  this.changeQty = (item, id, qty) => {
+    const itemQty = qty ? Number(qty) : 1;
+    var order = this.items[id];
+    if (!order) {
+      order = this.items[id] = {item: item, qty: 0, price: 0};
+      this.numItems++;
+    }
+    let oldQty = order.qty;
+    order.qty = itemQty;
+    order.price = order.item.price * order.qty;
+    this.totalQty += itemQty - oldQty;
+    this.totalPrice += order.price - order.item.price * oldQty;
   };
 
   this.convertArray = function () {

@@ -91,8 +91,14 @@
 								<div class="tt-content">
 									<div class="tt-rating">
 										<div class="tt-rating">
-											<i class="fa fa-star"></i>
+											{{!-- <i class="fa fa-star"></i>
 											<i class="icon-star-empty"></i>
+											<% var i = 0;for(i; i < this.star; i++) {%>
+											<i class="fa fa-star">{{this.star}}</i>
+											<% } %> <% i = 5 - i; while(i--){%>
+											<i class="icon-star-empty"></i>
+											<% } %> --}}
+											{{this.star}}<i class="fa fa-star"></i>
 										</div>
 									</div>
 									<div class="tt-comments-info">

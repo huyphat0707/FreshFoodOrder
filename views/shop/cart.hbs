@@ -8,8 +8,13 @@
                     Giỏ Hàng
                 </div>
                 <div class="">
-                    <a class="bases__btn btn-delete-all bases__font--15" href="/delete"><i class="fas fa-trash-alt mr-2"></i>Xoá giỏ hàng</a>
+                    <a class="bases__btn btn-delete-all bases__font--15" href="/delete"><i
+                            class="fas fa-trash-alt mr-2"></i>Xoá giỏ hàng</a>
                 </div>
+                {{!-- <div class=" ml-3">
+                    <a class="bases__btn btn-delete-all bases__font--15" href="/update"><i class="fas fa-trash-alt mr-2"></i>Cập nhât giỏ
+                        hàng</a>
+                </div> --}}
             </div>
             <div class="body">
                 <div class="data bases__font--16 align-items-center">
@@ -59,11 +64,20 @@
                         </div>
                         <div class="col-4 bases__text-bold">Tổng tiền <span class="badge">{{this.totalPrice}}đ</span>
                         </div>
+                        {{#if isAuthenticated}}
                         <div class="col-2 ">
                             <a href="/checkout" class="bases__btn btn-round-buy">
                                 <span class="bases__font--16">Thanh toán<i class="fa fa-angle-right"></i></span>
                             </a>
                         </div>
+                        {{else}}
+                        <div class="col-2 ">
+                            <a href="/verify-email" class="bases__btn btn-round-buy">
+                                <span class="bases__font--16">Xác thực Email<i class="fa fa-angle-right"></i></span>
+                            </a>
+                        </div>
+                        {{/if}}
+
                     </div>
                 </div>
             </div>

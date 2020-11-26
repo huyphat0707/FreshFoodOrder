@@ -20,20 +20,23 @@
                         {{/if}}
                     </ul>
                 </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item">
-                    <a href="/cart/" class="cart">Giỏ Hàng</a>
+                    <a href="/cart" class="nav-link">Giỏ Hàng
+                        {{#if session.cart.totalQty}}
+                        <span class="badge"> {{session.cart.totalQty}} </span>
+                        {{/if}}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contact-us" class="nav-link">Liên hệ</a>
                 </li>
             </ul>
         </div>
-        {{#if session.cart.totalQty}}
-        <span class="badge"> {{session.cart.totalQty}} </span>
-        {{/if}}
+
         <div class="search_input" id="search_input_box">
             <div class="container">
                 <form action="" method="post" class="d-flex justify-content-between">
-                    <input type="text" class="form-control" id="find" name="findPro" placeholder="Search Here">
+                    <input type="text" class="form-control" id="find" name="findPro" placeholder="Tìm kiếm tại đây">
                 </form>
             </div>
         </div>

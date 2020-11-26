@@ -35,9 +35,11 @@
             }
         }
     }
-    &-cart {
-        margin-left:200px;
+    .nav-link{
+        color: $color-white;
+        &:hover{
+            color: $color-blue;
+        }
     }
-    
   }
 }
