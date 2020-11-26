@@ -1,0 +1,95 @@
+{{#if products}}
+<div class="pages__cart">
+    <div class="bases__box">
+        <div class="bases__table page__cart-table">
+            <div class="heading bases__font--30 bases__text-bold d-flex">
+                <div>
+                    Giỏ Hàng
+                </div>
+                <a href="/remove/{{this.item._id}}">
+                    <div class="d-flex">
+                        <button class="bases__btn btn-delete justify-content-end">
+                            Xóa tất cả
+                        </button>
+                    </div>
+                </a>
+            </div>
+            <div class="body">
+                <div class="data bases__font--16 align-items-center">
+                    <div>Hình ảnh</div>
+                    <div>Tiêu đề</div>
+                    <div>Gía</div>
+                    <div>Số lượng</div>
+                    <div>Thành tiền</div>
+                    <div>Xóa</div>
+                    <div>Cập nhật</div>
+                    <div>
+                        <input type='checkbox' onchange="checkAll(this)">
+                    </div>
+                </div>
+                {{#each products }}
+                <form action="/update/{{this.item._id}}" method="post">
+                    <div class="data bases__font--16 align-items-center ">
+                        <div><img class="img" src="/upload/{{this.item.Image}}" alt=""></div>
+                        <div>{{this.item.Name}}</div>
+                        <div>{{this.item.price}}đ</div>
+                        <div><input id="{{this.item._id}}" name="qty" type="number" min="1" class="qty"
+                                value="{{this.qty}}"></div>
+                        <div>{{this.price}}đ</div>
+                        <div><button class="bases__btn btn-round dropdown-toggle" data-toggle="dropdown"
+                                type="button">Xóa<span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="/delCart/{{this.item._id}}">Xóa </a></li>
+                                <li><a href="/remove/{{this.item._id}}">Xóa tất cả</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <button type="submit" class="bases__btn btn-round">
+                                Cập nhật
+                            </button>
+                        </div>
+                        <div>
+                            <input type='checkbox' name='cart[]' value='{{this.item._id}}' />
+                        </div>
+                    </div>
+                </form>
+                {{/each}}
+            </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="row bases__font--30">Tổng tiền: </div>
+            <div class="row badge bases__font--20">${{totalPrice}}</div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <a href="/" class="mr-3">
+            <button class="bases__btn btn-submit d-flex align-items-center" type="button">
+                <i class="bases__font--12 bases__rotate-reverse fas fa-play mr-1"></i>
+                <span class="bases__font--16">Tiếp tục mua sắm</span>
+            </button>
+        </a>
+        <a href="/checkout">
+            <button class="bases__btn btn-submit d-flex align-items-center" type="button">
+                <i class="bases__font--12 fas fa-play mr-1"></i>
+                <span class="bases__font--16">Thanh toán</span>
+            </button>
+        </a>
+    </div>
+</div>
+{{else}}
+<h1 style="text-align: center; ">Không có sản phẩm nào trong giỏ hàng</h1>
+{{/if}}
+<script language="javascript">
+    function checkAll(e) {
+        var checkboxes = document.getElementsByName('cart[]');
+        if (e.checked) {
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = true;
+            }
+        } else {
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = false;
+            }
+        }
+    };
+</script>

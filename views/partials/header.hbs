@@ -1,50 +1,41 @@
 <div class="partials__header">
     <nav class="navbar navbar-expand-sm navbar-light ">
-        <a class="navbar-brand" href="#"> <img class="partials__header-logo" src="/img/logoo.png" alt=""> </a>
+        <a class="navbar-brand" href="/"> <img class="partials__header-logo" src="/img/logoo.png" alt=""> </a>
         <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav ml-auto">
                 <li class="nav-item "><a class="nav-link" href="/">Trang chủ</a></li>
                 <li class="nav-item "><a class="nav-link" href="/product">Sản phẩm</a></li>
-                {{!-- {{#if islogin}} --}}
+
                 <li class="nav-item submenu dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                         aria-haspopup="true" aria-expanded="false">Tài khoản</a>
                     <ul class="dropdown-menu">
-                        <li class="nav-item"><a class="nav-link" href="../user/logout">Đăng xuất</a></li>
-                          <li class="nav-item"><a class="nav-link" href="../user/edit">Thông tin tài khoản</a></li>
+                        {{!-- {{#if user }} --}}
+                        <li class="nav-item"><a class="nav-link" href="/user/logout">Đăng xuất</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="nav-item"><a class="nav-link" href="../user/userProfile">Thông tin tài khoản</a></li>
+                        {{!-- {{else}} --}}
+                        <li class="nav-item"><a class="nav-link" href="/user/registration">Đăng ký</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/user/login">Đăng nhập</a></li>
+                        {{!-- {{/if}} --}}
                     </ul>
                 </li>
-
-                {{!-- {{else}} --}}
-                <li class="nav-item"><a class="nav-link" href="../user/login">Đăng nhập</a></li>
-                {{!-- {{/if}} --}}
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                {{!-- {{#if islogin}} --}}
-                <li class="nav-item"><a href="/cart" class="cart">Gio Hang <span
-                            class="ti-bag">{{session.cart.amount}}</span></a></li>
-                {{!-- {{else}} --}}
-                <li class="nav-item"><a href="../user/login" class="cart"><span
-                            class="ti-bag">{{session.cart.amount}}</span></a></li>
-                {{!-- {{/if}} --}}
                 <li class="nav-item">
-                    <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
+                    <a href="/cart/" class="cart">Giỏ Hàng</a>
                 </li>
             </ul>
         </div>
+        {{#if session.cart.totalQty}}
+        <span class="badge"> {{session.cart.totalQty}} </span>
+        {{/if}}
         <div class="search_input" id="search_input_box">
             <div class="container">
                 <form action="" method="post" class="d-flex justify-content-between">
-                    <input type="text" class="form-control" id="find" name="find" placeholder="Search Here">
+                    <input type="text" class="form-control" id="find" name="findPro" placeholder="Search Here">
                 </form>
             </div>
         </div>
-
     </nav>
 </div>
-<script>
-	var islogin = $('#islogin').val();
-	if (islogin === 'false') {
-		$('.islogin').attr('href', '../user/login');
-	}
-</script>

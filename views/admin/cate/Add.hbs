@@ -15,6 +15,8 @@
         media="screen" />
     <link href="/admin_js/assets/css/style.css" rel="stylesheet" type="text/css" />
     <link href="/admin_js/assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    <!-- Icons -->
+    <link rel="stylesheet" href="/admin_js/assets/nucleo/css/nucleo.css" type="text/css">
 </head>
 
 <body>
@@ -39,11 +41,17 @@
                             <span class="name"> <i class="fa fa-angle-down"></i></span>
                         </a>
                         <ul class="dropdown-menu profile animated fadeIn">
-                            {{# if login}}
+                            {{#if user}}
                             <li class="last">
-                                <a href="../logout">
+                                <a href="/admin/logout">
                                     <i class="fa fa-lock"></i>
                                     Đăng xuất
+                                </a>
+                            </li>
+                            <li class="last">
+                                <a href="/admin/changePass">
+                                    <i class="fa fa-lock"></i>
+                                    Đổi mật khẩu
                                 </a>
                             </li>
                             {{/if}}
@@ -58,82 +66,97 @@
         <div class="page-sidebar pagescroll">
             <!-- MAIN MENU - START -->
             <div class="page-sidebar-wrapper" id="main-menu-wrapper">
-                <!-- USER INFO - START -->
                 <div class="profile-info row">
                     <div class="profile-image col-xs-4">
-                        <img alt="" src="/img/avatar.png" class="img-responsive img-circle avatar">
+                        <img alt="" src="/img/logo-FBD.png">
                         </a>
                     </div>
                     <div class="profile-details col-xs-8">
                         <h3>
                             <a class="name">{{user.email}}</a>
-                            <!-- Available statuses: online, idle, busy, away and offline -->
                             <span class="profile-status online"></span>
                         </h3>
-                        <p class="profile-title">Web dành cho nhà phát triển</p>
+                        <p class="profile-title">Fresh Food Management</p>
                     </div>
                 </div>
-                <!-- USER INFO - END -->
                 <ul class='wraplist'>
                     <li class='menusection'>Menu</li>
                     <li class="open">
                         <a href="/admin">
-                            <i class="fa fa-dashboard"></i>
-                            <span class="title">Thống kê</span>
+                            <i class="ni ni-chart-bar-32" style="color: #fb6340;"></i>
+                            <span class="title" style="opacity: 0.8;">Thống kê</span>
                         </a>
                     </li>
                     <li class="">
                         <a href="javascript:;">
-                            <i class="fa fa-suitcase"></i>
-                            <span class="title">Thể loại</span>
+                            <i class="ni ni-ungroup" style="color: #233dd2;"></i>
+                            <span class="title" style="opacity: 0.8;">Thể loại</span>
                             <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="/admin/cate/List">Danh Sách</a>
+                                <a class="" href="/admin/cate/List" style="opacity: 0.8; padding-left: 30px;">
+                                    <i class="ni ni-bullet-list-67" style="color: #11cdef;"></i>
+                                    <span class="title" style="opacity: 0.8;">Danh sách</span>
+                                </a>
                             </li>
                             <li>
-                                <a class="" href="/admin/cate/Add">Thêm</a>
+                                <a class="" href="/admin/cate/Add" style="opacity: 0.8; padding-left: 30px;">
+                                    <i class="ni ni-fat-add" style="color: #ea3005;"></i>
+                                    <span class="title" style="opacity: 0.8;">Thêm</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
                     <li class="">
                         <a href="javascript:;">
-                            <i class="fa fa-suitcase"></i>
-                            <span class="title">Sản Phẩm</span>
+                            <i class="ni ni-atom" style="color: #2dce89;"></i>
+                            <span class="title" style="opacity: 0.8;">Sản Phẩm</span>
                             <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="../product/List">Danh Sách</a>
+                                <a class="" href="/admin/product/List" style="opacity: 0.8; padding-left: 30px;">
+                                    <i class="ni ni-bullet-list-67" style="color: #11cdef;"></i>
+                                    <span class="title" style="opacity: 0.8;">Danh sách</span>
+                                </a>
                             </li>
                             <li>
-                                <a class="" href="../product/Add">Thêm</a>
+                                <a class="" href="/admin/product/Add" style="opacity: 0.8; padding-left: 30px;">
+                                    <i class="ni ni-fat-add" style="color: #ea3005;"></i>
+                                    <span class="title" style="opacity: 0.8;">Thêm</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="">
                         <a href="javascript:;">
-                            <i class="fa fa-suitcase"></i>
-                            <span class="title">Đơn Hàng</span>
+                            <i class="ni ni-basket" style="color: #ffd600;"></i>
+                            <span class="title" style="opacity: 0.8;">Đơn Hàng</span>
                             <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="../bill/list">Danh Sách</a>
+                                <a class="" href="../order/list" style="opacity: 0.8; padding-left: 30px;">
+                                    <i class="ni ni-bullet-list-67" style="color: #11cdef;"></i>
+                                    <span class="title" style="opacity: 0.8;">Danh sách</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
                     <li class="">
                         <a href="javascript:;">
-                            <i class="fa fa-suitcase"></i>
-                            <span class="title">Tài Khoản</span>
+                            <i class="ni ni-circle-08" style="color: #f3a4b5;"></i>
+                            <span class="title" style="opacity: 0.8;">Tài Khoản</span>
                             <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="/admin/user/List">Danh Sách</a>
+                                <a class="" href="/admin/user/List" style="opacity: 0.8; padding-left: 30px;">
+                                    <i class="ni ni-bullet-list-67" style="color: #11cdef;"></i>
+                                    <span class="title" style="opacity: 0.8;">Danh sách</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
@@ -166,9 +189,9 @@
                         </header>
                         <div class="content-body">
                             <div class="row">
-                                {{#if succsess_msg }}
+                                {{#if success_msg }}
                                 <div class="alert alert-info">
-                                    <p>{{succsess_msg}}</p>
+                                    <p>{{success_msg}}</p>
                                 </div>
                                 {{/if}}
                                 {{#if hasErrors}}
@@ -181,12 +204,6 @@
                                 <form action="./add" method="POST" enctype="multipart/form-data">
                                     <div class="col-xs-12 col-sm-9 col-md-8 padding-bottom-30">
                                         <div class="form-group">
-                                            <label class="form-label" for="name">ID thể loại</label>
-                                            <span class="desc"></span>
-                                            <div class="controls">
-                                                <input type="number" id="cateID" value="" class="form-control"
-                                                    name="cateID" required="required">
-                                            </div>
                                             <label class="form-label" for="img">Hình</label>
                                             <span class="desc"></span>
                                             <div class="controls">

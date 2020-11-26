@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class=" ">
+
 <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
@@ -12,6 +13,8 @@
     <link href="/admin_js/assets/css/style.css" rel="stylesheet" type="text/css" />
     <link href="/admin_js/assets/css/responsive.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="/dist/css/main.css">
+    <!-- Icons -->
+    <link rel="stylesheet" href="/admin_js/assets/nucleo/css/nucleo.css" type="text/css">
 </head>
 
 <body>
@@ -36,7 +39,7 @@
                             <span class="name"> <i class="fa fa-angle-down"></i></span>
                         </a>
                         <ul class="dropdown-menu profile animated fadeIn">
-                            {{!-- {{#if login_ad}} --}}
+                            {{#if user}}
                             <li class="last">
                                 <a href="/admin/logout">
                                     <i class="fa fa-lock"></i>
@@ -49,7 +52,7 @@
                                     Đổi mật khẩu
                                 </a>
                             </li>
-                            {{!-- {{/if}} --}}
+                            {{/if}}
                         </ul>
                     </li>
                 </ul>
@@ -60,85 +63,101 @@
         <div class="page-sidebar pagescroll">
             <!-- MAIN MENU - START -->
             <div class="page-sidebar-wrapper" id="main-menu-wrapper">
-                <!-- USER INFO - START -->
                 <div class="profile-info row">
                     <div class="profile-image col-xs-4">
-                        <img alt="" src="/img/avatar.png" class="img-responsive img-circle avatar">
+                        <img alt="" src="/img/logo-FBD.png">
                         </a>
                     </div>
                     <div class="profile-details col-xs-8">
                         <h3>
-                            <a class="name">{{data.email}}</a>
-                            <!-- Available statuses: online, idle, busy, away and offline -->
+                            <a class="name">{{user.email}}</a>
                             <span class="profile-status online"></span>
                         </h3>
                         <p class="profile-title">Fresh Food Management</p>
                     </div>
                 </div>
-                <!-- USER INFO - END -->
                 <ul class='wraplist'>
                     <li class='menusection'>Menu</li>
                     <li class="open">
                         <a href="/admin">
-                            <i class="fa fa-dashboard"></i>
-                            <span class="title">Thống kê</span>
+                            <i class="ni ni-chart-bar-32" style="color: #fb6340;"></i>
+                            <span class="title" style="opacity: 0.8;">Thống kê</span>
                         </a>
                     </li>
                     <li class="">
                         <a href="javascript:;">
-                            <i class="fa fa-suitcase"></i>
-                            <span class="title">Thể loại</span>
+                            <i class="ni ni-ungroup" style="color: #233dd2;"></i>
+                            <span class="title" style="opacity: 0.8;">Thể loại</span>
                             <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="/admin/cate/List">Danh Sách</a>
+                                <a class="" href="/admin/cate/List" style="opacity: 0.8; padding-left: 30px;">
+                                    <i class="ni ni-bullet-list-67" style="color: #11cdef;"></i>
+                                    <span class="title" style="opacity: 0.8;">Danh sách</span>
+                                </a>
                             </li>
                             <li>
-                                <a class="" href="/admin/cate/Add">Thêm</a>
+                                <a class="" href="/admin/cate/Add" style="opacity: 0.8; padding-left: 30px;">
+                                    <i class="ni ni-fat-add" style="color: #ea3005;"></i>
+                                    <span class="title" style="opacity: 0.8;">Thêm</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
                     <li class="">
                         <a href="javascript:;">
-                            <i class="fa fa-suitcase"></i>
-                            <span class="title">Sản Phẩm</span>
+                            <i class="ni ni-atom" style="color: #2dce89;"></i>
+                            <span class="title" style="opacity: 0.8;">Sản Phẩm</span>
                             <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="/admin/product/List">Danh Sách</a>
+                                <a class="" href="/admin/product/List" style="opacity: 0.8; padding-left: 30px;">
+                                    <i class="ni ni-bullet-list-67" style="color: #11cdef;"></i>
+                                    <span class="title" style="opacity: 0.8;">Danh sách</span>
+                                </a>
                             </li>
                             <li>
-                                <a class="" href="/admin/product/Add">Thêm</a>
+                                <a class="" href="/admin/product/Add" style="opacity: 0.8; padding-left: 30px;">
+                                    <i class="ni ni-fat-add" style="color: #ea3005;"></i>
+                                    <span class="title" style="opacity: 0.8;">Thêm</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="">
                         <a href="javascript:;">
-                            <i class="fa fa-suitcase"></i>
-                            <span class="title">Đơn Hàng</span>
+                            <i class="ni ni-basket" style="color: #ffd600;"></i>
+                            <span class="title" style="opacity: 0.8;">Đơn Hàng</span>
                             <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a class="" href="admin/bill/list">Danh Sách</a>
+                                <a class="" href="../order/list" style="opacity: 0.8; padding-left: 30px;">
+                                    <i class="ni ni-bullet-list-67" style="color: #11cdef;"></i>
+                                    <span class="title" style="opacity: 0.8;">Danh sách</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
                     <li class="">
                         <a href="javascript:;">
-                            <i class="fa fa-suitcase"></i>
-                            <span class="title">Tài Khoản</span>
+                            <i class="ni ni-circle-08" style="color: #f3a4b5;"></i>
+                            <span class="title" style="opacity: 0.8;">Tài Khoản</span>
                             <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                               <a class="" href="/admin/user/List">Danh Sách</a>
+                                <a class="" href="/admin/user/List" style="opacity: 0.8; padding-left: 30px;">
+                                    <i class="ni ni-bullet-list-67" style="color: #11cdef;"></i>
+                                    <span class="title" style="opacity: 0.8;">Danh sách</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
+
                 </ul>
             </div>
             <!-- MAIN MENU - END -->
@@ -154,9 +173,51 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-
                 <div class="clearfix"></div>
                 <div class="col-lg-12">
+                    <section class="box nobox marginBottom0">
+                        <div class="content-body">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="r4_counter db_box">
+                                        <i class='pull-left fa fa-thumbs-up icon-md icon-rounded icon-primary'></i>
+                                        <div class="stats">
+                                            <h4><strong>45%</strong></h4>
+                                            <span>Đơn hàng mới</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="r4_counter db_box">
+                                        <i class='pull-left fa fa-shopping-cart icon-md icon-rounded icon-accent'></i>
+                                        <div class="stats">
+                                            <h4><strong>243</strong></h4>
+                                            <span>Sản phẩm mới</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="r4_counter db_box">
+                                        <i class='pull-left fa fa-dollar icon-md icon-rounded icon-purple'></i>
+                                        <div class="stats">
+                                            <h4><strong>$3424</strong></h4>
+                                            <span>Doanh thu </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="r4_counter db_box">
+                                        <i class='pull-left fa fa-users icon-md icon-rounded icon-warning'></i>
+                                        <div class="stats">
+                                            <h4><strong>{{count}}</strong></h4>
+                                            <span>Người dùng </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End .row -->
+                        </div>
+                    </section>
                 </div>
                 <div class="col-xs-12">
                     <section class="box ">
@@ -179,16 +240,42 @@
                                                     </div>
                                                 </figure>
                                             </div>
-    
+                                            <div class="map_progress col-xs-12 col-sm-3">
+                                                <h4>Lượng người dùng truy cập</h4>
+                                                <span class='text-muted'><small>Tăng 62% so với tuần
+                                                        trước</small></span>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-primary" role="progressbar"
+                                                        aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"
+                                                        style="width: 62%"></div>
+                                                </div>
+                                                <br>
+                                                <h4>Đăng ký</h4>
+                                                <span class='text-muted'><small>Tăng 57% trong 7 ngày qua</small></span>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-primary" role="progressbar"
+                                                        aria-valuenow="57" aria-valuemin="0" aria-valuemax="100"
+                                                        style="width: 57%"></div>
+                                                </div>
+                                                <br>
+                                                <h4>Doanh số bán</h4>
+                                                <span class='text-muted'><small>Tháng trước tăng 22%</small></span>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-primary" role="progressbar"
+                                                        aria-valuenow="22" aria-valuemin="0" aria-valuemax="100"
+                                                        style="width: 22%"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- End .row -->
                         </div>
                     </section>
                 </div>
             </section>
-        </section>         
+        </section>
     </div>
     <div class="modal" id="section-settings" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog animated bounceInDown">

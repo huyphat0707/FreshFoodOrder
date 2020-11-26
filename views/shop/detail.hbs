@@ -10,35 +10,66 @@
 </section>
 <div class="container pages__detailpro">
 	{{# products}}
-	<div class="row s_product_inner">
-		<div class="col-left">
-			<div class="single-prd-item">
-				<img class="img-fluid" width="350px" height=" 400px" src="/upload/{{this.Image}}" alt="">
-			</div>
+	<div class="row d-flex">
+		<div class="col-6 pl-0">
+			<img class="img" data-zoom-image="/upload/{{this.Image}}" id="zoom_05" src="/upload/{{this.Image}}">
 		</div>
-		<div class="col-right">
-			<div class="d-flex">
-				<div class="">Tên sản phẩm:</div>
-				<div class="bases__font--30 bases__text-bold">{{this.Name}}</div>
+		<div class="col-6 justify-content-end ">
+			<hr>
+			<div class=" row d-flex">
+				<div class="col-4">Tên sản phẩm:</div>
+				<div class="col-8 ">{{this.Name}}</div>
 			</div>
-			<div class="d-flex">
-				<div>Giá niêm yết:</div>
-				<div class="bases__font--20">${{this.Price}} </div>
+			<hr>
+			<div class="row d-flex">
+				<div class="col-4">Giá niêm yết:</div>
+				<div class="col-8">${{this.price}} </div>
 			</div>
-			<div class="list">
-				<a href="#"></a><span>Tình trạng</span> : Còn hàng</a>
+			<hr>
+			<div class="row d-flex">
+				<div class="col-4">Số lượng</div>
+				<div class="col-8">1</div>
 			</div>
-			{{!-- <div class="d-flex">
-				<div>Mô tả sản phẩm:</div>
-				<div>{{this.Description }}</div>
-			</div> --}}
+			<hr>
+			<div class=" row d-flex">
+				<div class="col-4">Mô tả sản phẩm:</div>
+				<div class="col-8">{{this.Description }}</div>
+			</div>
+			<hr>
+			<div class="row d-flex align-items-center">
+				<div>
+					<a href="/checkout">
+						<button class="bases__btn btn-round-buy ">
+							<i class="bases__font--12 fa fa-list-alt ml-1"></i>
+							<span class="bases__font--16">Mua ngay</span>
+						</button>
+					</a>
+				</div>
+				<div>
+					<a href="/addToCart/{{this._id}}">
+						<button class="bases__btn btn-round-cart ">
+							<i class="bases__font--12 fas fa-shopping-cart ml-1"></i>
+							<span class="bases__font--16">Thêm vào giỏ hàng</span>
+						</button>
+					</a>
+				</div>
 
+			</div>
+			<div class="row">
+				
+			</div>
+			
 		</div>
-		<div class="card_area d-flex align-items-center">
-			<a class="primary-btn" href="/cart/{{this._id}}">Thêm vào giỏ hàng</a>
-		</div>
+
 	</div>
 </div>
 {{/products}}
 </div>
 <!--================End Product Description Area =================-->
+
+<script>
+	$('#zoom_05').ezPlus({
+		zoomType: 'inner',
+		cursor: 'crosshair'
+	});
+</script>
