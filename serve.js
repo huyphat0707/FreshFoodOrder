@@ -104,6 +104,7 @@ app.use('/', indexRouter);
 //api
 app.use('/api/product', require('./api/product'));
 app.use('/api/cate', require('./api/cate'));
+app.use('/api/order', require('./api/order'));
 
 app.use(function (req, res, next) {
   res.locals.login = req.isAuthenticated();

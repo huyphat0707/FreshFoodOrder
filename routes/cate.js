@@ -44,7 +44,7 @@ router.get('/list', isLoggedIn, (req, res, next) => {
         if (err) return next(err);
         res.render('admin/cate/List', {
           layout: false,
-          data: cate,
+          data: cate.reverse(),
           current: page,
           hasNextPage: perPage * page < count,
           hasPreviousPage: page > 1,

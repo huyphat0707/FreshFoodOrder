@@ -5,7 +5,7 @@ var Order = require('../models/order.js');
 var Cart = require('../models/cart.js');
 
 router.get('/', isLoggedIn, function (req, res, next) {
-    res.redirect('/admin/order/list', {layout: false});
+    res.render('admin/order/list', {layout: false});
 });
 
 router.get('/list', isLoggedIn, function (req, res, next) {
