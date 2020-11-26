@@ -1,0 +1,34 @@
+<div class="bases__box">
+    <div class="body">
+        <h1 class="tt-title-subpages noborder">XÁC THỰC EMAIL</h1>
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <h2 class="mb-3">
+                        Nhập mã xác thực đã gửi ở {{user.email}}
+                    </h2>
+                    <div class="form-group form-control error {{#if noMessages}} hidden {{/if}}"
+                        style="background-color: #FFCCCC; font-weight: bold; color : rgb(210, 29, 29)">
+                        {{messages}}
+                    </div>
+                    <div class="form-default">
+                        <form method="POST" action="/verify-email" id="createaccount">
+                            <div class="form-group ">
+                                <label for="loginInputEmail">Nhập mã xác thực *</label>
+                                <input type="text" name="token" class="form-control mt-2" id="loginInputEmail"
+                                    placeholder="Mã xác thực" />
+                            </div>
+                            <div class="row">
+                                <div class="col-auto">
+                                    <div class="form-group">
+                                        <button class="bases__btn btn-round-buy" type="submit">
+                                            Xác thực
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

@@ -1,46 +1,48 @@
 .pages {
     &__mainuser {
-        .products{
+        .products {
             .main-product {
                 margin-bottom: 2rem;
                 margin-right: 17px;
                 display: block;
-                .content-product{
-                    .title{
-                        padding: .5rem 0;
+                .content-product {
+                    .title {
+                        padding: 10px 0;
                         overflow: hidden;
-                        color: #222;
                         font-weight: 500;
                         font-size: 16px;
                         max-height: 50px;
-                        min-height: 50px;
                         text-align: center;
                         line-height: 19px;
                         margin: 0 0 5px;
                     }
-                    .bottom{
+                    .star {
+                        text-align: center;
+                        line-height: 19px;
+                        margin-bottom: 15px;
+                    }
+                    .bottom {
                         justify-content: center;
-                        &-price{
+                        &-price {
                             color: $color-yellow-dark;
                             font-weight: 700;
                             margin-right: 2rem;
                             vertical-align: middle;
-                            .money{
+                            .money {
                                 vertical-align: middle;
                             }
                         }
-                        &-cart{
+                        &-cart {
                             background: $color-yellow;
                             border-radius: 5px;
                             color: $color-white;
                             font-weight: 500;
                             border-color: $color-yellow;
-                            &:hover{
+                            &:hover {
                                 background: $color-yellow-dark;
                             }
                         }
                     }
-
                 }
                 .img {
                     margin-bottom: 10px;
@@ -52,8 +54,8 @@
                     background-color: $color-white;
                     -webkit-filter: blur(1px);
                     filter: blur(1px);
-                    -webkit-transition: .3s ease-in-out;
-                    transition: .3s ease-in-out;
+                    -webkit-transition: 0.3s ease-in-out;
+                    transition: 0.3s ease-in-out;
                     &:hover {
                         -webkit-filter: blur(0);
                         filter: blur(0);
@@ -61,26 +63,23 @@
                 }
             }
         }
-        &-paginate{
-            margin-bottom: 60px;
-        }
-        .select{
-            &-order{
+        .select {
+            &-order {
                 width: 200px;
-                &:first-child{
+                &:first-child {
                     margin-right: 20px;
                 }
             }
-            &-number{
+            &-number {
                 width: 100px;
             }
         }
-        .section-title{
+        .section-title {
             padding: 20px;
             margin-left: 50px;
-            h1{
+            h1 {
                 font-size: 30px;
-                &:first-child{
+                &:first-child {
                     margin-left: 30px;
                 }
             }

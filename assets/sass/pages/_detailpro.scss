@@ -1,6 +1,5 @@
 .pages{
     &__detailpro{
-        padding-bottom: 60px;
         .col{
             &-6{
                 .img{
@@ -10,9 +9,6 @@
                     border-color: $color-gray;
                     object-fit: cover;
                     border-radius: 3px;
-                    &:first-child{
-                        margin-bottom: 50px;
-                    }
                 }
             }
             &-4{

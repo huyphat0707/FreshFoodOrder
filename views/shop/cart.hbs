@@ -2,17 +2,19 @@
 <div class="pages__cart">
     <div class="bases__box">
         <div class="bases__table page__cart-table">
-            <div class="heading bases__font--30 bases__text-bold d-flex">
-                <div>
+            <div class="heading bases__font--30 bases__text-bold d-flex ">
+                <div class="mr-3">
+                    <i class="fas fa-cart-plus"></i>
                     Giỏ Hàng
                 </div>
-                <a href="/remove/{{this.item._id}}">
-                    <div class="d-flex">
-                        <button class="bases__btn btn-delete justify-content-end">
-                            Xóa tất cả
-                        </button>
-                    </div>
-                </a>
+                <div class="">
+                    <a class="bases__btn btn-delete-all bases__font--15" href="/delete"><i
+                            class="fas fa-trash-alt mr-2"></i>Xoá giỏ hàng</a>
+                </div>
+                {{!-- <div class=" ml-3">
+                    <a class="bases__btn btn-delete-all bases__font--15" href="/update"><i class="fas fa-trash-alt mr-2"></i>Cập nhât giỏ
+                        hàng</a>
+                </div> --}}
             </div>
             <div class="body">
                 <div class="data bases__font--16 align-items-center">
@@ -30,8 +32,8 @@
                 {{#each products }}
                 <form action="/update/{{this.item._id}}" method="post">
                     <div class="data bases__font--16 align-items-center ">
-                        <div><img class="img" src="/upload/{{this.item.Image}}" alt=""></div>
-                        <div>{{this.item.Name}}</div>
+                        <div><img class="img" src="/upload/{{this.item.image}}" alt=""></div>
+                        <div>{{this.item.name}}</div>
                         <div>{{this.item.price}}đ</div>
                         <div><input id="{{this.item._id}}" name="qty" type="number" min="1" class="qty"
                                 value="{{this.qty}}"></div>
@@ -40,7 +42,7 @@
                                 type="button">Xóa<span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li><a href="/delCart/{{this.item._id}}">Xóa </a></li>
-                                <li><a href="/remove/{{this.item._id}}">Xóa tất cả</a></li>
+                                <li><a href="/remove/{{this.item._id}}">Xóa hàng loạt </a></li>
                             </ul>
                         </div>
                         <div>
@@ -54,26 +56,32 @@
                     </div>
                 </form>
                 {{/each}}
+                <div>
+                    <div class="row mt-3">
+                        <div class="col-6 ">
+                            <a class="bases__btn btn-round-cart " href="/"><i class="fa fa-angle-left"></i>Tiếp tục mua
+                                sắm</a>
+                        </div>
+                        <div class="col-4 bases__text-bold">Tổng tiền <span class="badge">{{this.totalPrice}}đ</span>
+                        </div>
+                        {{#if isAuthenticated}}
+                        <div class="col-2 ">
+                            <a href="/checkout" class="bases__btn btn-round-buy">
+                                <span class="bases__font--16">Thanh toán<i class="fa fa-angle-right"></i></span>
+                            </a>
+                        </div>
+                        {{else}}
+                        <div class="col-2 ">
+                            <a href="/verify-email" class="bases__btn btn-round-buy">
+                                <span class="bases__font--16">Xác thực Email<i class="fa fa-angle-right"></i></span>
+                            </a>
+                        </div>
+                        {{/if}}
+
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="d-flex align-items-center justify-content-center">
-            <div class="row bases__font--30">Tổng tiền: </div>
-            <div class="row badge bases__font--20">${{totalPrice}}</div>
-        </div>
-    </div>
-    <div class="d-flex justify-content-center">
-        <a href="/" class="mr-3">
-            <button class="bases__btn btn-submit d-flex align-items-center" type="button">
-                <i class="bases__font--12 bases__rotate-reverse fas fa-play mr-1"></i>
-                <span class="bases__font--16">Tiếp tục mua sắm</span>
-            </button>
-        </a>
-        <a href="/checkout">
-            <button class="bases__btn btn-submit d-flex align-items-center" type="button">
-                <i class="bases__font--12 fas fa-play mr-1"></i>
-                <span class="bases__font--16">Thanh toán</span>
-            </button>
-        </a>
     </div>
 </div>
 {{else}}

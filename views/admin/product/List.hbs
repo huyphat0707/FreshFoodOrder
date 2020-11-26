@@ -178,7 +178,7 @@
                         <div class="pull-right ">
                             <form action="" method="POST">
                                 <input type="text" class="form-control" id="find" name="findProduct"
-                                    placeholder="Search Here">
+                                    placeholder="Tìm kiếm tại đây">
                             </form>
                         </div>
                     </div>
@@ -218,15 +218,15 @@
                                                 {{#each product}}
                                                 <tr>
                                                     <td>1</td>
-                                                    <td>{{Name}}</td>
+                                                    <td>{{name}}</td>
                                                     <td>
                                                         <img class="img-thumbnail img-preview "
-                                                            src="../../upload/{{Image}}" title="Hình ảnh" width="100"
+                                                            src="../../upload/{{image}}" title="Hình ảnh" width="100"
                                                             height="100">
                                                     </td>
                                                     <td>{{price}}</td>
                                                     <td style="width: 300px;white-space: normal;word-break: break-all">
-                                                        {{Description}}</td>
+                                                        {{description}}</td>
                                                     <td>
                                                         <a href="/admin/product/{{this._id}}/delete" onclick="return confirm('Are you sure to delete this item?')"
                                                             class="bg-danger">Xoá</a> |

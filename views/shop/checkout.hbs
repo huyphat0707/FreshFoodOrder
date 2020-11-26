@@ -1,6 +1,6 @@
 <div class="page__checkout">
     <div id="body">
-        <h2>Responsive Checkout Form</h2>
+        <h2>Biểu mẫu thanh toán đáp ứng</h2>
         <div id="charge-error" class="alert alert-danger {{#if noError}} hidden {{/if}} ">
             {{errMsg}}
         </div>
@@ -10,58 +10,62 @@
                     <form action="/checkout" id="checkout-form" method="POST">
                         <div class="row">
                             <div class="col-50">
-                                <h3>Billing Address</h3>
-                                <label for="name"><i class="fa fa-user"></i> Full Name</label>
+                                <h3>Địa chỉ thanh toán</h3>
+                                <label for="name"><i class="fa fa-user"></i> Họ và tên</label>
                                 <input type="text" id="name" name="name" placeholder="">
-                                <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                                <label for="email"><i class="fa fa-envelope"></i>E-mail</label>
                                 <input type="text" id="email" name="email" placeholder="">
-                                <label for="address"><i class="fa fa-address-card-o"></i> Address</label>
+                                <label for="date-picker-example"><i class="fas fa-birthday-cake"></i> Sinh nhật</label>
+                                <input type="text" id="date-picker-example" id="datepicker" name="birthday"
+                                    placeholder="">
+                                <label for="address"><i class="fa fa-address-card-o"></i> Địa chỉ</label>
                                 <input type="text" id="address" name="address" placeholder="">
-                                <label for="city"><i class="fa fa-institution"></i> City</label>
+                                <label for="city"><i class="fa fa-institution"></i> Thành phố</label>
                                 <input type="text" id="city" name="city" placeholder="">
                             </div>
                             <div class="col-50">
-                                <h3>Payment</h3>
-                                <label for="fname">Accepted Cards</label>
+                                <h3>Thanh toán</h3>
+                                <label for="fname">Thẻ được chấp nhận</label>
                                 <div class="icon-container">
                                     <i class="fa fa-cc-visa" style="color:navy;"></i>
                                     <i class="fa fa-cc-amex" style="color:blue;"></i>
                                     <i class="fa fa-cc-mastercard" style="color:red;"></i>
                                     <i class="fa fa-cc-discover" style="color:orange;"></i>
                                 </div>
-                                <label for="card-name">Card Holder Name</label>
+                                <label for="card-name">Tên chủ thẻ</label>
                                 <input type="text" id="card-name" name="" placeholder="">
-                                <label for="card-number">Credit card number</label>
+                                <label for="card-number">Số thẻ tín dụng</label>
                                 <input type="text" id="card-number" name="" placeholder="1111-2222-3333-4444">
-                                <label for="card-cvc">CVV</label>
+                                <label for="card-cvc">CVC</label>
                                 <input type="text" id="card-cvc" name="" placeholder="352">
                                 <div class="row">
                                     <div class="col-50">
-                                        <label for="card-expiry-month">Exp Month</label>
+                                        <label for="card-expiry-month">Tháng hết hạn</label>
                                         <input type="text" id="card-expiry-month" name="" placeholder="September">
                                     </div>
                                     <div class="col-50">
-                                        <label for="card-expiry-year">Exp Year</label>
+                                        <label for="card-expiry-year">Năm hết hạn</label>
                                         <input type="text" id="card-expiry-year" name="" placeholder="2018">
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-                        <button type="submit" class="btn">Buy now</button>
+                        <button type="submit" class="btn">Mua ngay</button>
                     </form>
                 </div>
             </div>
             <div class="col-25">
                 <div class="container">
-                    <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <span
+                    <h4>Giỏ hàng <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <span
                                 class="badge"> {{totalQty}} </span></span>
                     </h4>
                     {{#each products}}
-                    <p><a href="/detail/{{this.item._id}}"> {{this.item.Name}} </a> <span class="price bases__text-bold">${{this.price}} </span></p>
+                    <p><a href="/detail/{{this.item._id}}"> {{this.item.name}} </a> <span
+                            class="price bases__text-bold">{{this.price}} đ</span></p>
                     {{/each}}
                     <hr>
-                    <p>Total <span class="price" style="color:black"><b>$ {{totalPrice}} </b></span></p>
+                    <p>Tổng tất cả <span class="price" style="color:black"><b>{{totalPrice}} đ</b></span></p>
                 </div>
             </div>
         </div>
@@ -69,3 +73,6 @@
 </div>
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript" src="javascripts/checkout.js"></script>
+<script>
+    $("#datepicker").datepicker();
+</script>
