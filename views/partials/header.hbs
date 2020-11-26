@@ -10,30 +10,33 @@
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                         aria-haspopup="true" aria-expanded="false">Tài khoản</a>
                     <ul class="dropdown-menu">
-                        {{!-- {{#if user }} --}}
+                        {{#if user }}
                         <li class="nav-item"><a class="nav-link" href="/user/logout">Đăng xuất</a></li>
                         <li role="separator" class="divider"></li>
                         <li class="nav-item"><a class="nav-link" href="../user/userProfile">Thông tin tài khoản</a></li>
-                        {{!-- {{else}} --}}
+                        {{else}}
                         <li class="nav-item"><a class="nav-link" href="/user/registration">Đăng ký</a></li>
                         <li class="nav-item"><a class="nav-link" href="/user/login">Đăng nhập</a></li>
-                        {{!-- {{/if}} --}}
+                        {{/if}}
                     </ul>
                 </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item">
-                    <a href="/cart/" class="cart">Giỏ Hàng</a>
+                    <a href="/cart" class="nav-link">Giỏ Hàng
+                        {{#if session.cart.totalQty}}
+                        <span class="badge"> {{session.cart.totalQty}} </span>
+                        {{/if}}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contact-us" class="nav-link">Liên hệ</a>
                 </li>
             </ul>
         </div>
-        {{#if session.cart.totalQty}}
-        <span class="badge"> {{session.cart.totalQty}} </span>
-        {{/if}}
+
         <div class="search_input" id="search_input_box">
             <div class="container">
                 <form action="" method="post" class="d-flex justify-content-between">
-                    <input type="text" class="form-control" id="find" name="findPro" placeholder="Search Here">
+                    <input type="text" class="form-control" id="find" name="findPro" placeholder="Tìm kiếm tại đây">
                 </form>
             </div>
         </div>

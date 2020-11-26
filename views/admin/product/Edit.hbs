@@ -15,6 +15,7 @@
         media="screen" />
     <link href="/admin_js/assets/css/style.css" rel="stylesheet" type="text/css" />
     <link href="/admin_js/assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
 </head>
 <body>
     <div class='page-topbar '>
@@ -78,13 +79,13 @@
                     <li class='menusection'>Menu</li>
                     <li class="open">
                         <a href="/admin">
-                            <i class="fa fa-dashboard"></i>
+                            <i class="fas fa-tachometer-alt"></i>
                             <span class="title">Thống kê</span>
                         </a>
                     </li>
                     <li class="">
                         <a href="javascript:;">
-                            <i class="fa fa-suitcase"></i>
+                            <i class="fa fa-list-alt"></i>
                             <span class="title">Thể loại</span>
                             <span class="arrow "></span>
                         </a>
@@ -115,7 +116,7 @@
 
                     <li class="">
                         <a href="javascript:;">
-                            <i class="fa fa-suitcase"></i>
+                            <i class="fas fa-luggage-cart"></i>
                             <span class="title">Đơn Hàng</span>
                             <span class="arrow "></span>
                         </a>
@@ -127,7 +128,7 @@
                     </li>
                     <li class="">
                         <a href="javascript:;">
-                            <i class="fa fa-suitcase"></i>
+                            <i class="fa fa-users"></i>
                             <span class="title">Tài Khoản</span>
                             <span class="arrow "></span>
                         </a>
@@ -184,7 +185,7 @@
                                             <label class="form-label" for="field-120334">Tên sản phẩm</label>
                                             <span class="desc"></span>
                                             <div class="controls">
-                                                <input type="text" id="name" value="{{product.Name}}" class="form-control"
+                                                <input type="text" id="name" value="{{product.name}}" class="form-control"
                                                     name="name">
                                             </div>
                                         </div>
@@ -193,7 +194,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="field-120334">Hình</label>
                                             <span class="desc"></span><br />
-                                            <img src="/upload/{{product.Image}}" width="200px">
+                                            <img src="/upload/{{product.image}}" width="200px">
                                             <div class="controls">
                                                 <input type="file" id="image" value="" required="required"
                                                     class="form-control" name="image">
@@ -226,7 +227,7 @@
                                             <span class="desc"></span>
                                             <div class="controls">
                                                 <select class="form-control" name="categoryUp">
-                                                    <option value="" selected>{{product.CateId}}</option>
+                                                    <option value="" selected>{{product.cateId}}</option>
                                                     {{#each cate}}
                                                     <option value="{{name}}">{{name}}</option>
                                                     {{/each}}
@@ -240,7 +241,7 @@
                                             <span class="desc"></span>
                                             <div class="controls">
                                                 <textarea name="description" id="description" class="form-control autogrow"
-                                                    cols="5">{{product.Description}}</textarea>
+                                                    cols="5">{{product.description}}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -250,7 +251,7 @@
                                             <span class="desc"></span>
                                             <div class="controls">
                                                 <textarea name="storage" id="storage" class="form-control autogrow"
-                                                    cols="5" rows="2">{{product.Storage}}</textarea>
+                                                    cols="5" rows="2">{{product.storage}}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -260,7 +261,7 @@
                                             <span class="desc"></span>
                                             <div class="controls">
                                                 <textarea name="origin" id="origin" class="form-control autogrow"
-                                                    cols="5" rows="1">{{product.Origin}}</textarea>
+                                                    cols="5" rows="1">{{product.origin}}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -270,7 +271,7 @@
                                             <span class="desc"></span>
                                             <div class="controls">
                                                 <textarea name="usage" id="usage" class="form-control autogrow"
-                                                    cols="5">{{product.Usage}}</textarea>
+                                                    cols="5">{{product.usage}}</textarea>
                                             </div>
                                         </div>
                                     </div>

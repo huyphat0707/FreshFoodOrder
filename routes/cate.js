@@ -131,5 +131,5 @@ module.exports = router;
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated() && req.user.roles === 1) {
     return next();
-  } else res.redirect('/');
+  } else res.redirect('/admin/login');
 }
