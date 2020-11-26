@@ -855,7 +855,7 @@ a:hover, a:focus {
 }
 #main-menu-wrapper li.open .sub-menu a.active, #main-menu-wrapper li.open .sub-menu a:hover, #main-menu-wrapper li .sub-menu a:hover {
     background-color: rgba(33, 33, 33, 0.1);
-    border-left: 4px solid #3F51B5;
+    border-left: 4px solid #31ee80;
 }
 
 #main-menu-wrapper li.open .sub-menu a{
@@ -864,12 +864,12 @@ a:hover, a:focus {
 
 #main-menu-wrapper li a:hover {
     background-color: rgba(33, 33, 33, 0.1);
-    border-left: 4px solid #3F51B5;
+    border-left: 4px solid #31ee80;
     /*color: #ffffff;*/
 }
 #main-menu-wrapper li.open a {
     background-color: rgba(33, 33, 33, 0.1);
-    border-left: 4px solid #3F51B5;
+    border-left: 4px solid #31ee80;
 }
 #main-menu-wrapper li a:hover .arrow:before, #main-menu-wrapper li.open a .arrow:before {
     color: #757575;
@@ -1001,7 +1001,7 @@ a:hover, a:focus {
     background: transparent;
     padding-top: 15px;
     padding-bottom: 10px;
-    padding-left: 20px;
+    padding-left: 0px;
     padding-right: 15px;
 }
 .page-sidebar .profile-image {
@@ -1009,13 +1009,10 @@ a:hover, a:focus {
     display: inline-block;
 }
 .profile-info .profile-image img {
-    height: 65px;
-    width: 65px;
-    float: right;
-    top: 5px;
-    left: 5px;
+    height: 85px;
+    width: 85px;
+    float: left;
     position: relative;
-    background-color: #777777;
 }
 .profile-info .profile-details{
     white-space: nowrap;
@@ -1968,7 +1965,7 @@ ul.states li {
     font-size: inherit;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: #9e9e9escale;
+    -moz-osx-font-smoothing: #9e9e9e;
 }
 .icon-chevron-up:before {
     content: "\f077";
@@ -5104,7 +5101,7 @@ code {
 /*collapsed menu and chat open states*/
 
 .page-topbar.sidebar_shift .logo-area {
-    background-color: #3f51b5;
+    background-color: #4CAF50;
 }
 .page-topbar.chat_shift .logo-area {
     background-color: #3f51b5;

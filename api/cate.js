@@ -4,7 +4,7 @@ const Cate = require('../models/cate');
 
 router.get('/allCate', async (req, res) =>{
     try {
-        let CateData = await Cate.find();
+        let CateData = await Cate.find().select("-_id -__v");
         return res.status(200).json({dataAllCate: CateData});
     } catch (error) {
         return res.status(400).json({ msg: "có lỗi xảy ra"});
