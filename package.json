@@ -2,6 +2,9 @@
   "name": "serveorder",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "10.16.0"
+  },
   "main": "serve.js",
   "watch": {
     "build": "public/js/main.js"
@@ -59,10 +62,7 @@
     "randomstring": "^1.1.5",
     "request": "^2.88.2",
     "sass-loader": "^10.0.4",
-    "stripe": "^8.121.0",
-    "engines": {
-        "node": "10.16.0"
-      }
+    "stripe": "^8.121.0"
   },
   "devDependencies": {
     "handlebars": "^4.7.6",
