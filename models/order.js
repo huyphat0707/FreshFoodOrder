@@ -12,28 +12,30 @@ var Cart = new Schema({
     },
     name: {
         type: String,
-        required: true
     },
     email: {
         type: String,
-        required: true
+    },
+    birthday:{
+        type: Date,
     },
     address: {
         type: String,
-        required: true
     },
     city: {
         type: String,
-        required: true
     },
     date: {
         type: Date,
         required: false,
         default: Date.now
     },
+    payment: {
+        type: Boolean,
+        default: false,
+    },
     paymentId: {
         type: String,
-        required: true
     }
 });
 module.exports = mongoose.model('order', Cart);

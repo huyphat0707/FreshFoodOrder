@@ -228,21 +228,27 @@
                                                 {{/each}}
                                             </tbody>
                                         </table>
-                                        <tr style="text-align: right;"> 
-                                            <td colspan="5">
-                                                <span>Đã Thanh Toán</span>
-                                                |
-                                                <a href="/admin/order/{{pro._id}}/delete">Xoá</a>
-                                            </td>
-                                        </tr>
                                         <tr>
-                                            <td >
-                                                <p style="text-align: right; margin-right: 60px; padding-right: 40px;">
-                                                    <strong class="text-danger">
+                                            <td colspan="12">
+                                                <p >
+                                                    <strong class="text-danger mr-3 bases__font--18">
                                                         Tồng Tiền:
                                                     </strong>
-                                                    {{this.totalPrice}}đ
+                                                    <span class="bases__text-bold bases__font--22">
+                                                        {{this.totalPrice}}đ
+                                                    </span>
+
                                                 </p>
+                                                {{#if pro.payment}}
+                                                <span class="btn btn-danger">Đã Thanh Toán</span>
+                                                {{else}}
+                                                <a href="/admin/order/{{pro._id}}/pay">
+                                                    <span class="btn btn-primary">Thanh Toán</span>
+                                                </a>
+                                                {{/if}}
+                                                |
+                                                <a href="/admin/order/{{pro._id}}/delete" class="btn btn-delete">Xoá</a>
+
                                             </td>
                                         </tr>
                                     </div>
