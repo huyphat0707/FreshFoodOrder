@@ -3,7 +3,7 @@
         <div class="body">
             <section class="section">
                 <!--Section heading-->
-                <form method="POST" action="/contact-us">
+                <form method="POST" action="/contact">
                     <div class="form-group form-control error {{#if noMessages}} hidden {{/if}}"
                         style="background-color: #FFCCCC; font-weight: bold; color : rgb(210, 29, 29)">
                         {{messages}}
@@ -22,7 +22,7 @@
                                             <i class="fas fa-user prefix grey-text"></i>
                                             <label for="form-name">Họ tên</label>
                                         </div>
-                                        <input type="text" id="form-name" name="name" class="form-control">
+                                        <input type="text" id="form-name" name="name" class="form-control" required>
 
                                     </div>
                                     <div class="md-form mb-3">
@@ -30,14 +30,14 @@
                                             <i class="fas fa-envelope prefix grey-text"></i>
                                             <label for="form-email">Email</label>
                                         </div>
-                                        <input type="text" id="form-email" name="email" class="form-control">
+                                        <input type="text" id="form-email" name="email" class="form-control" required>
                                     </div>
                                     <div class="md-form mb-3">
                                         <div class="row align-items-center mb-2">
                                             <i class="fas fa-tag prefix grey-text"></i>
                                             <label for="form-Subject">Tiêu đề</label>
                                         </div>
-                                        <input type="text" id="form-Subject" name="title" class="form-control">
+                                        <input type="text" id="form-Subject" name="title" class="form-control" required>
                                     </div>
 
                                     <div class="md-form ">
@@ -46,7 +46,7 @@
                                             <label for="form-text">Nội dung</label>
                                         </div>
                                         <textarea id="form-text" name="content" class="form-control md-textarea"
-                                            rows="3"></textarea>
+                                            rows="3" required></textarea>
                                     </div>
                                     <div class="text-center mt-3">
                                         <button class="bases__btn btn-round-buy" type="submit">Submit</button>

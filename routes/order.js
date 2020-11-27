@@ -48,6 +48,15 @@ router.get('/:id/delete', isLoggedIn, function (req, res, next) {
     });
 });
 
+router.get('/:id/pay', isLoggedIn, function (req, res, next) {
+  var id = req.params.id;
+  Order.findById(id, function (err, data) {
+    data.payment = true;
+    data.save();
+    req.flash('success_msg', 'Đã Thanh Toán');
+    res.redirect('/admin/order/' + id + '/view');
+  });
+});
 module.exports = router;
 
 // Hàm được sử dụng để kiểm tra đã login hay chưa
