@@ -31,7 +31,7 @@ var order = require('./routes/order');
 //connect mongoose
 app.use(cors());
 const mongoose = require('mongoose');
-const urlConnect = process.env.DB;
+const urlConnect = process.env.DATABASE_URL;
 mongoose.connect(
   urlConnect,
   {

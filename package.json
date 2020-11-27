@@ -13,7 +13,6 @@
     "dev": "concurrently --kill-others \"gulp dev\" \"nodemon serve\"",
     "start:dev": "concurrently --kill-others \"gulp build\" ",
     "start": "node serve.js"
-
   },
   "author": "",
   "license": "ISC",
