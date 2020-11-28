@@ -2,15 +2,15 @@
     &__mainuser {
         .products {
             .main-product {
+                width: 250px;
                 border-radius: 16px;
                 -webkit-box-shadow: 0 0 10px rgb(202, 197, 197);
                 box-shadow: 0 0 10px rgb(189, 184, 184);
                 background-color: $color-white;
-                margin-bottom: 2rem;
-                margin-right: 30px;
+                margin: 15px 13px;
                 display: block;
                 .content-product {
-                    padding: 16px;
+                    padding: 10px;
                     .title {
                         padding: 10px 0;
                         overflow: hidden;
@@ -31,28 +31,28 @@
                         &-price {
                             color: $color-yellow-dark;
                             font-weight: 700;
-                            margin-right: 2rem;
                             vertical-align: middle;
+                            margin-right: 10px;
                             .money {
                                 vertical-align: middle;
                             }
                         }
                         &-cart {
-                            background: $color-yellow;
+                            background: $color-green;
                             border-radius: 5px;
+                            border-color: $color-green;
                             color: $color-white;
-                            font-weight: 500;
-                            border-color: $color-yellow;
+                            font-weight: 300;
                             &:hover {
-                                background: $color-yellow-dark;
+                                opacity:.5 ;
                             }
                         }
                     }
                 }
                 .img {
                     object-fit: cover;
-                    width: 260px;
-                    height: 250px;
+                    width: 220px;
+                    height: 150px;
                     margin: 16px 16px 0px 16px;
                     border-radius: 16px;
                     background-color: $color-white;

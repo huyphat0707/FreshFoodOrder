@@ -61,20 +61,31 @@ router.post('/?', (req, res, next) => {
 
 //trang category
 router.get('/product', function (req, res) {
-    Product
-        .find()
-        .then(function (product) {
-            Cate
-                .find()
-                .then(function (cate) {
-                    res.render('shop/product', {
-                        product: product,
-                        cate: cate,
-                        session: req.session,
-                        user: req.user
-                    });
-                });
+  var perPage = 6;
+  var page = parseInt(req.query.page) || 1;
+    Product.find()
+      .skip((page - 1) * perPage)
+      .limit(perPage)
+      .then(function (product) {
+        Cate.find().then(function (cate) {
+           Product.countDocuments().exec(function (err, count) {
+             if (err) return next(err);
+             res.render('shop/product', {
+               product: product,
+               current: page,
+               hasNextPage: perPage * page < count,
+               hasPreviousPage: page > 1,
+               nextPage: page + 1,
+               previousPage: page - 1,
+               pages: Math.ceil(count / perPage),
+               perPage: perPage,
+               session: req.session,
+               user: req.user,
+               cate: cate,
+             });
+           });
         });
+      });
 });
 
 router.get('/cate/:name.:id', function (req, res) {
@@ -154,7 +165,8 @@ router.post('/', function (req, res) {
                 res.render('shop/product', {
                     product: result,
                     cate: cate,
-                    user: req.user
+                    user: req.user,
+                    session: req.session
                 });
             });
         });
@@ -173,7 +185,8 @@ router.post('/product', function (req, res) {
                 res.render('shop/product', {
                     product: result,
                     cate: cate,
-                    user: req.user
+                    user: req.user,
+                    session: req.session
                 });
             });
         });
@@ -192,11 +205,51 @@ router.post('/detail/:id', function (req, res) {
                 res.render('shop/product', {
                     product: result,
                     cate: cate,
-                    user: req.user
+                    user: req.user,
+                    session: req.session
                 });
             });
         });
 });
+
+router.post('/cart', function (req, res) {
+    var find = req.body.findPro;
+    Cate
+        .find()
+        .then(function (cate) {
+            Product.find({
+                name: {
+                    $regex: find
+                }
+            }, function (err, result) {
+                res.render('shop/product', {
+                    product: result,
+                    cate: cate,
+                    session: req.session
+                });
+            });
+        });
+});
+
+router.post('/contact-us', function (req, res) {
+    var find = req.body.findPro;
+    Cate
+        .find()
+        .then(function (cate) {
+            Product.find({
+                name: {
+                    $regex: find
+                }
+            }, function (err, result) {
+                res.render('shop/product', {
+                    product: result,
+                    cate: cate,
+                    session: req.session
+                });
+            });
+        });
+});
+
 // add product to cart
 router.get('/addToCart/:id', function (req, res, next) {
     var productId = req.params.id;
@@ -229,7 +282,7 @@ router.get('/cart', function (req, res, next) {
         totalPrice: cart.totalPrice,
         user: user,
         session: req.session,
-        isAuthenticated:isAuthenticated
+        isAuthenticated: isAuthenticated
     });
 });
 
@@ -247,6 +300,29 @@ router.get('/checkout', isLoggedIn, function (req, res, next) {
         noError: !errMsg,
         user: req.user,
         session: req.session
+    });
+});
+
+router.post('/payment', isLoggedIn, function (req, res) {
+    if (!req.session.cart) {
+        return res.redirect('/checkout', {products: null});
+    }
+    var cart = new Cart(req.session.cart);
+    var order = new Order({
+        user: req.user,
+        cart: cart,
+        name: req.body.name,
+        email: req.body.email,
+        birthday: req.body.birthday,
+        address: req.body.address,
+        city: req.body.city
+    });
+
+    order.save(function (err, result) {
+        req.flash('success', 'Đã thanh toán thành công!');
+        req.session.cart = null;
+        user = req.user;
+        res.redirect('/user/userProfile');
     });
 });
 
@@ -273,20 +349,12 @@ router.post('/checkout', isLoggedIn, function (req, res, next) {
                 req.flash('error', err.message);
                 return res.redirect('/checkout');
             }
-            var order = new Order({
-                user: req.user,
-                cart: cart,
-                name: req.body.name,
-                email: req.body.email,
-                address: req.body.address,
-                city: req.body.city,
-                paymentId: charge.id
-            });
+            var order = new Order({user: req.user, cart: cart, paymentId: charge.id});
             order.save(function (err, result) {
                 req.flash('success', 'Đã thanh toán thành công!');
                 req.session.cart = null;
                 user = req.user;
-                res.redirect('/user/profile');
+                res.redirect('/user/userProfile');
             });
         });
 });
@@ -350,27 +418,17 @@ router.post('/update/:id', function (req, res) {
     });
 });
 
-router.get('/update',function(req,res,next){
+router.get('/update', function (req, res, next) {
     var prodId = req.query.id;
     console.log(prodId);
-//     var qty = req.query.qty;
-//     if (qty == 0) {
-//       return res.redirect('back');
-//     }
-//     var cart = new Cart(req.session.cart ? req.session.cart : {});
-//     Product.findById(prodId, (err, product) => {
-//       if (err) {
-//         return res.redirect('back');
-//       }
-//       cart.changeQty(product, prodId, qty);
-//       req.session.cart = cart;
-//       if (req.user) {
-//         req.user.cart = cart;
-//         req.user.save();
-//       }
-//       res.redirect('back');
-//     });
-})
+    // var qty = req.query.qty;     if (qty == 0) {       return
+    // res.redirect('back');     }     var cart = new Cart(req.session.cart ?
+    // req.session.cart : {});     Product.findById(prodId, (err, product) => {
+    // if (err) {         return res.redirect('back');       }
+    // cart.changeQty(product, prodId, qty);       req.session.cart = cart;       if
+    // (req.user) {         req.user.cart = cart;         req.user.save();       }
+    // res.redirect('back');     });
+});
 
 router.get('/verify-email', function (req, res, next) {
     var transporter = nodemailer.createTransport({
@@ -436,7 +494,7 @@ router.get('/contact-us', function (req, res, next) {
     });
 });
 
-router.post('/contact-us', function (req, res, next) {
+router.post('/contact', function (req, res, next) {
     var body = req.body;
     var transporter = nodemailer.createTransport({
         service: 'Gmail',
@@ -460,7 +518,7 @@ router.post('/contact-us', function (req, res, next) {
             console.log('Sent:' + info.response);
         }
     });
-    req.flash('success', 'Đã gửi thành công')
+    req.flash('success', 'Đã gửi thành công');
     res.redirect('/contact-us');
 });
 

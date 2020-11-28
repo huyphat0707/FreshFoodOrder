@@ -27,7 +27,8 @@ router.get('/userProfile', function (req, res, next) {
         });
         res.render('user/profile', {
             orders: orders,
-            user: req.user
+            user: req.user,
+            session: req.session
         });
     });
 });
