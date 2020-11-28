@@ -2,10 +2,15 @@
     &__mainuser {
         .products {
             .main-product {
+                border-radius: 16px;
+                -webkit-box-shadow: 0 0 10px rgb(202, 197, 197);
+                box-shadow: 0 0 10px rgb(189, 184, 184);
+                background-color: $color-white;
                 margin-bottom: 2rem;
-                margin-right: 17px;
+                margin-right: 30px;
                 display: block;
                 .content-product {
+                    padding: 16px;
                     .title {
                         padding: 10px 0;
                         overflow: hidden;
@@ -45,12 +50,11 @@
                     }
                 }
                 .img {
-                    margin-bottom: 10px;
                     object-fit: cover;
                     width: 260px;
                     height: 250px;
-                    border: 1px solid;
-                    border-color: $color-red;
+                    margin: 16px 16px 0px 16px;
+                    border-radius: 16px;
                     background-color: $color-white;
                     -webkit-filter: blur(1px);
                     filter: blur(1px);
