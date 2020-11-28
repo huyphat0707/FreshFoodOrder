@@ -400,7 +400,7 @@ a:hover, a:focus {
     min-height: 60px;
     position: fixed;
     width: 100%;
-    background-color: #3F51B5;
+    background-color:#65eb79;
     top: 0px;
     left: 0px;
     z-index: 1999;
@@ -413,7 +413,7 @@ a:hover, a:focus {
 }
 .page-topbar .logo-area {
     width: 260px;
-    background-color: #3F51B5;
+    background-color: #65eb79;
     display: block;
     min-height: 60px;
     float: left;
@@ -780,6 +780,7 @@ a:hover, a:focus {
     position: fixed;
     padding: 0px;
     background-color: #ffffff;
+    background-blend-mode: unset;
     margin-top: 60px;
     overflow: hidden;
     box-shadow: 0 0 10px 0 rgba(33,33,33,.2);
@@ -5101,10 +5102,10 @@ code {
 /*collapsed menu and chat open states*/
 
 .page-topbar.sidebar_shift .logo-area {
-    background-color: #4CAF50;
+    background-color: #65eb79;
 }
 .page-topbar.chat_shift .logo-area {
-    background-color: #3f51b5;
+    background-color: #65eb79;
 }
 .chatapi-windows.hideit {
     bottom: -300px;
