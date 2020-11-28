@@ -27,6 +27,7 @@ var user = require('./routes/user');
 var users = require('./routes/userAdmin');
 var indexRouter = require('./routes/index');
 var order = require('./routes/order');
+let nutritional = require('./routes/nutritional');
 
 //connect mongoose
 app.use(cors());
@@ -98,6 +99,7 @@ app.use('/admin/product', product);
 app.use('/admin/cate', cate);
 app.use('/admin/user', users);
 app.use('/admin/order', order);
+app.use('/admin/nutritional', nutritional);
 app.use('/user', user);
 app.use('/', indexRouter);
 
