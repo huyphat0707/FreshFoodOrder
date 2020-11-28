@@ -4,7 +4,7 @@ const Product = require('../models/product');
 
 router.get('/allProduct', async (req, res) =>{
     try {
-        let ProductData = await Product.find();
+        let ProductData = await Product.find().select("-_id -__v");
         return res.status(200).json({dataAllProduct: ProductData});
     } catch (error) {
         return res.status(400).json({ msg: "có lỗi xảy ra"});
