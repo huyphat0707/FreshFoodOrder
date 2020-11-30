@@ -32,11 +32,11 @@
                                             <i class="fa fa-cc-visa" style="color:navy;"></i>
                                         </div>
                                         <label for="card-name">Tên chủ thẻ</label>
-                                        <input type="text" id="card-name" name="" placeholder="">
+                                        <input type="text" id="card-name" name="" placeholder="" required>
                                         <label for="card-number">Số thẻ tín dụng</label>
-                                        <input type="text" id="card-number" name="" placeholder="1111-2222-3333-4444">
+                                        <input type="text" id="card-number" name="" required placeholder="1111-2222-3333-4444">
                                         <label for="card-cvc">CVC</label>
-                                        <input type="text" id="card-cvc" name="" placeholder="352">
+                                        <input type="text" id="card-cvc" name="" required placeholder="352">
                                         <div class="row">
                                             <div class="col-50">
                                                 <label for="card-expiry-month">Tháng hết hạn</label>
@@ -70,6 +70,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <div class="row">
+                                        
                                         <button type="submit" id="payment" class="btn btn-primary mr-2">Thanh
                                             toán</button>
                                         <button type="button" class="btn-cancel"
@@ -93,23 +94,31 @@
                         <div class="row justify-content-center">
                             <div class="col-50">
                                 <label for="name"><i class="fa fa-user"></i> Họ và tên</label>
-                                <input type="text" id="name" name="name" placeholder="">
+                                <input type="text" id="name" name="name" placeholder="" required>
                                 <label for="email"><i class="fa fa-envelope"></i> E-mail</label>
-                                <input type="text" id="email" name="email" placeholder="">
+                                <input type="text" id="email" name="email" placeholder="" required>
                                 <label><i class="fas fa-birthday-cake"></i> Ngày sinh</label>
-                                <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy"> <input
+                                <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy" required> <input
                                         class="form-control" readonly="" type="text"> <span class="input-group-addon"><i
                                             class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
 
                                 <label for="address"><i class="fa fa-address-card-o"></i> Địa chỉ</label>
-                                <input type="text" id="address" name="address" placeholder="">
+                                <input type="text" id="address" name="address" placeholder="" required>
                                 <label for="city"><i class="fa fa-institution"></i> Thành phố</label>
-                                <input type="text" id="city" name="city" placeholder="">
+                                <input type="text" id="city" name="city" placeholder="" required>
                             </div>
                         </div>
                         <div class="text-center">
+                            {{#if isAuthenticated }}
+                            <div class="col-2 ">
+                                <a href="/verify-email" class="bases__btn btn-round-buy">
+                                    <span class="bases__font--16">Xác thực Email<i class="fa fa-angle-right"></i></span>
+                                </a>
+                            </div>
+                            {{else}}
                             <button type="submit" class="btn ">Thanh Toán</button>
+                            {{/if}}
                         </div>
                     </form>
                 </div>

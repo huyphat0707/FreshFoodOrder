@@ -11,6 +11,7 @@ app.use(flash());
 var session = require('express-session');
 var createError = require('http-errors');
 var bodyParser = require('body-parser');
+var csrf = require('csurf');
 var express_handlebars_sections = require('express-handlebars-sections');
 var validator = require('express-validator');
 const {
@@ -90,6 +91,14 @@ app.use(
     },
   })
 );
+app.use(csrf());
+// app.use(function (req, res, next) {
+//   var token = req.csrfToken();
+//   console.log(token);
+//   res.cookie('TOKEN', token);
+//   res.locals.csrftoken = token;
+//   next();
+// });
 
 app.use(passport.initialize());
 app.use(passport.session());
