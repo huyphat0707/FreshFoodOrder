@@ -1,51 +1,54 @@
 <form action="/user/login" method="POST">
 	<div class="bases__box">
-		<div class="heading">
-			<div class="d-flex align-items-center">
-				<img class="bases__icon-sm mr-3" src="/img/logoo.png" />
-				<div class="bases__font--20 bases__text-bold">
-					Đăng nhập
-				</div>
-			</div>
-		</div>
 		<div class="body">
-			<!-- radio -->
-			{{#if hasErrors}}
-			<div class="alert alert-danger">
-				{{#each messages}}
-				<p>{{this}}</p>
-				{{/each}}
+			<div class="row ">
+				<div class="col-6 align-items-center">
+					<img src="/img/login.png" alt="" width="500px" height="400px">
+				</div>
+				<div class="col-6">
+					<div class="row justify-content-center">
+						<div class="bases__font--30 bases__text-bold">Đăng nhập</div>
+					</div>
+					<div class="alert alert-success {{#if noSuccess}} hidden {{/if}}">
+						<p>{{success_msg}}</p>
+					</div>
+					{{#if hasErrors}}
+					<div class="alert alert-danger ">
+						{{#each messages}}
+						<p >{{this}}</p>
+						{{/each}}
+					</div>
+					{{/if}}
+					<div class="row">
+						<label for="email">Email:</label>
+						<input type="email" class="w-100 mt-2" name="email" id="email" required>
+					</div>
+					<div class="row">
+						<label for="password">Mật khẩu:</label>
+						<input type="password" class="w-100 mt-2" name="password" id="password" required>
+					</div>
+					<div class="row d-flex">
+						<div class="col-6 d-flex align-items-center">
+						<input type="checkbox" name="" id="">Nhớ tôi
+						</div>
+						<div class="col-6 d-flex align-items-center justify-content-end">
+							<a href="/user/forgotPassword">Quên mật khẩu?</a>
+						</div>
+					</div>
+					<div class="row">
+						<input type="hidden" , name="_csrf" value="{{csrfToken}}">
+						<button type="submit" class="bases__btn btn-submit">
+							<span class="bases__font--16">Đăng nhập</span>
+							<i class="bases__font--12 fas fa-play ml-1"></i>
+						</button>
+					</div>
+					<hr>
+					<div class="row">
+						<p>Bạn chưa có tài khoản? <a href="/user/registration" class="text-danger">Đăng ký tại đây!</a></p>
+					</div>
+				</div>
 			</div>
-			{{/if}}
-			<div class="row align-items-center">
-				<div class="bases__col-left pl-0">
-					Email:
-				</div>
-				<div class="bases__col-right pr-0 d-flex">
-					<input class="w-100" type="text" id="email" maxlength="255" name="email" />
-				</div>
-			</div>
-			<div class="row align-items-center">
-				<div class="bases__col-left pl-0">
-					Password:
-				</div>
-				<div class="bases__col-right pr-0 d-flex">
-					<input class="w-100" type="password" maxlength="255" name="password" />
-				</div>
-			</div>
+
 		</div>
-	</div>
-	<div class="d-flex justify-content-center">
-		<a class="mr-4" href="/user/registration">
-			<button class="bases__btn btn-submit d-flex align-items-center" type="button">
-				<i class="bases__font--12 bases__rotate-reverse fas fa-play mr-1"></i>
-				<span class="bases__font--16">Register</span>
-			</button>
-		</a>
-		<input type="hidden" , name="_csrf" value="{{csrfToken}}">
-		<button type="submit" class="bases__btn btn-submit d-flex align-items-center">
-			<span class="bases__font--16">Login</span>
-			<i class="bases__font--12 fas fa-play ml-1"></i>
-		</button>
 	</div>
 </form>
