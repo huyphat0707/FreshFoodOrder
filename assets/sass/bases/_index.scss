@@ -115,10 +115,11 @@
         }
     }
     &__box {
+        width: 1110px;
         background-color: $color-white;
         border-radius: 4px;
         box-shadow: 0 0 5px $color-white, 0 0 3px $color-shadow;
-        margin: 40px 100px 0;
+        margin-left: 120px ;
         &:first-child {
             margin-top: 0;
         }
@@ -176,12 +177,10 @@
             &-submit {
                 background-color: $color-blue;
                 color: $color-white;
-                width: 240px;
                 padding: 16px !important;
-                margin-top: 54px;
-                margin-bottom: 30px;
+                margin-top: 20px;
+                margin-bottom: 10px;
                 border: unset;
-                margin-right: 24px;
                 &:last-child {
                     margin-right: 0;
                 }

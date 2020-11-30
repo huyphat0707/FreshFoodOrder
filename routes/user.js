@@ -4,11 +4,13 @@ var passport = require('passport');
 var csrf = require('csurf');
 var csrfProtection = csrf();
 router.use(csrfProtection);
+var bcrypt = require('bcrypt-nodejs');
 var randomString = require('randomstring');
 var nodemailer = require('nodemailer');
-var Users = require('../models/user');
+var User = require('../models/user');
 var Order = require('../models/order');
 var Cart = require('../models/cart');
+var swal = require('sweetalert2');
 
 require('dotenv').config();
 
@@ -30,6 +32,35 @@ router.get('/userProfile', function (req, res, next) {
             user: req.user,
             session: req.session
         });
+    });
+});
+
+router.get('/changePass', isLoggedIn, function (req, res, next) {
+    const messages = req.flash('error');
+    res.render('user/changePassword', {
+        csrfToken: req.csrfToken(),
+        user: req.user,
+        messages: messages,
+        hasErrors: messages.length > 0
+    });
+});
+
+router.post('/changePass', isLoggedIn, function (req, res, next) {
+    bcrypt.compare(req.body.oldPass, req.user.password, function (err, result) {
+        if (!result) {
+            req.flash('error', 'Mật khẩu cũ không đúng!');
+            return res.redirect('back');
+        } else if (req.body.newPass != req.body.newPass2) {
+            req.flash('error', 'Nhập lại mật khẩu không khớp!');
+            return res.redirect('back');
+        } else {
+            req.user.password = bcrypt.hashSync(req.body.newPass);
+            req
+                .user
+                .save();
+            req.flash('success_msg', 'Đổi mật khẩu thành công!');
+            res.redirect('/user/login');
+        }
     });
 });
 
@@ -65,11 +96,14 @@ router.post('/registration', passport.authenticate('local-registration', {
 
 router.get('/login', function (req, res, next) {
     var messages = req.flash('error');
+    var success_msg = req.flash('success_msg')[0];
     res.render('user/login', {
         csrfToken: req.csrfToken(),
         messages: messages,
         hasErrors: messages.length > 0,
-        user: req.user
+        user: req.user,
+        success_msg:success_msg,
+        noSuccess: !success_msg
     });
 });
 router.post('/login', passport.authenticate('local-login', {
@@ -83,6 +117,55 @@ router.post('/login', passport.authenticate('local-login', {
     } else {
         res.redirect(oldUrl);
     }
+});
+
+router.get('/forgotPassword', function (req, res, next) {
+    const messages = req.flash('error');
+    res.render('user/forgotPassword', {
+      csrfToken: req.csrfToken(),
+      user: req.user,
+      messages: messages,
+      hasErrors: messages.length > 0,
+    });
+});
+
+router.post('/forgotPassword', function (req, res, next) {
+    const email = req.body.email;
+    User.findOne({
+        email: email
+    }, (err, user) => {
+        if (!user) {
+            req.flash('error', 'Email không tồn tại!');
+            return res.redirect('/user/forgotPassword');
+        } else {
+            let mailTransporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD
+                }
+            });
+            var pass = randomString.generate({length: 6});
+            let mailDetails = {
+                from: process.env.EMAIL,
+                to: email,
+                subject: 'Send Password',
+                html: '<p>Mật khẩu mới của bạn là:</p>' + pass
+            };
+
+            mailTransporter.sendMail(mailDetails, function (err, data) {
+                if (err) {
+                    console.log('Error Occurs');
+                } else {
+                    console.log('Send email successful');
+                }
+            });
+            user.password = bcrypt.hashSync(pass, bcrypt.genSaltSync(5), null);
+            user.save();
+            req.flash('success_msg', 'Mật khẩu mới đã được gửi đến email của bạn!');
+            res.redirect('/user/login');
+        }
+    });
 });
 
 module.exports = router;

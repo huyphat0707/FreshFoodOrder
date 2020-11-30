@@ -7,6 +7,7 @@ var Product = require('../models/product');
 var Cate = require('../models/cate');
 var Cart = require('../models/cart');
 var Order = require('../models/order');
+var bcrypt = require('bcrypt-nodejs');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -61,31 +62,37 @@ router.post('/?', (req, res, next) => {
 
 //trang category
 router.get('/product', function (req, res) {
-  var perPage = 6;
-  var page = parseInt(req.query.page) || 1;
-    Product.find()
-      .skip((page - 1) * perPage)
-      .limit(perPage)
-      .then(function (product) {
-        Cate.find().then(function (cate) {
-           Product.countDocuments().exec(function (err, count) {
-             if (err) return next(err);
-             res.render('shop/product', {
-               product: product,
-               current: page,
-               hasNextPage: perPage * page < count,
-               hasPreviousPage: page > 1,
-               nextPage: page + 1,
-               previousPage: page - 1,
-               pages: Math.ceil(count / perPage),
-               perPage: perPage,
-               session: req.session,
-               user: req.user,
-               cate: cate,
-             });
-           });
+    var perPage = 6;
+    var page = parseInt(req.query.page) || 1;
+    Product
+        .find()
+        .skip((page - 1) * perPage)
+        .limit(perPage)
+        .then(function (product) {
+            Cate
+                .find()
+                .then(function (cate) {
+                    Product
+                        .countDocuments()
+                        .exec(function (err, count) {
+                            if (err) 
+                                return next(err);
+                            res.render('shop/product', {
+                                product: product,
+                                current: page,
+                                hasNextPage: perPage * page < count,
+                                hasPreviousPage: page > 1,
+                                nextPage: page + 1,
+                                previousPage: page - 1,
+                                pages: Math.ceil(count / perPage),
+                                perPage: perPage,
+                                session: req.session,
+                                user: req.user,
+                                cate: cate
+                            });
+                        });
+                });
         });
-      });
 });
 
 router.get('/cate/:name.:id', function (req, res) {
@@ -276,13 +283,11 @@ router.get('/cart', function (req, res, next) {
     }
     var cart = new Cart(req.session.cart);
     var user = req.user;
-    var isAuthenticated = true;
     res.render('shop/cart', {
         products: cart.convertArray(),
         totalPrice: cart.totalPrice,
         user: user,
         session: req.session,
-        isAuthenticated: isAuthenticated
     });
 });
 
@@ -292,6 +297,7 @@ router.get('/checkout', isLoggedIn, function (req, res, next) {
     }
     var cart = new Cart(req.session.cart);
     var errMsg = req.flash('error')[0];
+    var isAuthenticated = req.user.isAuthenticated;
     res.render('shop/checkout', {
         products: cart.convertArray(),
         totalPrice: cart.totalPrice,
@@ -299,7 +305,8 @@ router.get('/checkout', isLoggedIn, function (req, res, next) {
         errMsg: errMsg,
         noError: !errMsg,
         user: req.user,
-        session: req.session
+        session: req.session,
+        isAuthenticated: isAuthenticated
     });
 });
 
@@ -423,11 +430,11 @@ router.get('/update', function (req, res, next) {
     console.log(prodId);
     // var qty = req.query.qty;     if (qty == 0) {       return
     // res.redirect('back');     }     var cart = new Cart(req.session.cart ?
-    // req.session.cart : {});     Product.findById(prodId, (err, product) => {
-    // if (err) {         return res.redirect('back');       }
-    // cart.changeQty(product, prodId, qty);       req.session.cart = cart;       if
-    // (req.user) {         req.user.cart = cart;         req.user.save();       }
-    // res.redirect('back');     });
+    // req.session.cart : {});     Product.findById(prodId, (err, product) => { if
+    // (err) {         return res.redirect('back');       } cart.changeQty(product,
+    // prodId, qty);       req.session.cart = cart;       if (req.user) {
+    // req.user.cart = cart;         req.user.save();       } res.redirect('back');
+    // });
 });
 
 router.get('/verify-email', function (req, res, next) {
@@ -509,7 +516,8 @@ router.post('/contact', function (req, res, next) {
         subject: body.name,
         text: body.title,
         html: '<p>You have got a new message</b><ul><li>Username:' + body.name + '</li><li>Em' +
-                'ail:' + body.email + '</li><li>Message:' + body.content + '</li></ul>'
+                'ail:' + body.email + '</li><li>Title:' + body.title + '</li><li>Message:' +
+                body.content + '</li></ul>'
     };
     transporter.sendMail(mainOptions, (err, info) => {
         if (err) {
@@ -521,6 +529,7 @@ router.post('/contact', function (req, res, next) {
     req.flash('success', 'Đã gửi thành công');
     res.redirect('/contact-us');
 });
+
 
 module.exports = router;
 function isLoggedIn(req, res, next) {

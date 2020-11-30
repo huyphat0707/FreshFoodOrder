@@ -1,8 +1,10 @@
-<div class="bases__box">
-    <div class="body">
-        <h1 class="tt-title-subpages noborder">XÁC THỰC EMAIL</h1>
+<div class="pages__verify">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <h1 >XÁC THỰC EMAIL</h1>
             <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-6">
+                <div class="col-md-12 col-lg-12">
                     <h2 class="mb-3">
                         Nhập mã xác thực đã gửi ở {{user.email}}
                     </h2>
@@ -12,10 +14,10 @@
                     </div>
                     <div class="form-default">
                         <form method="POST" action="/verify-email" id="createaccount">
-                            <div class="form-group ">
+                            <div class="form-group">
                                 <label for="loginInputEmail">Nhập mã xác thực *</label>
                                 <input type="text" name="token" class="form-control mt-2" id="loginInputEmail"
-                                    placeholder="Mã xác thực" />
+                                    placeholder="Mã xác thực" required />
                             </div>
                             <div class="row">
                                 <div class="col-auto">
@@ -30,5 +32,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-3">
+        </div>
     </div>
 </div>
